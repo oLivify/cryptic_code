@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherChat</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🔒 CipherChat</h1>
+
+    <input
+        type="text"
+        id="key"
+        placeholder="Enter Secret Key"
+    >
+
+    <textarea
+        id="input"
+        placeholder="Enter Message"
+    ></textarea>
+
+    <div class="buttons">
+        <button onclick="encryptMessage()">
+            Encrypt
+        </button>
+
+        <button onclick="decryptMessage()">
+            Decrypt
+        </button>
+    </div>
+
+    <textarea
+        id="output"
+        readonly
+        placeholder="Result"
+    ></textarea>
+
+    <button onclick="copyOutput()">
+        Copy Result
+    </button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
