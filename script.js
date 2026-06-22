@@ -1,4 +1,4 @@
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 function generateTable() {
     const table = [];
