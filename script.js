@@ -1,4 +1,4 @@
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 function generateTable() {
     const table = [];
@@ -15,37 +15,48 @@ function generateTable() {
 
 const vigenereTable = generateTable();
 
-function cleanText(text) {
-    return text
-        .toUpperCase()
-        .replace(/[^A-Z]/g, "");
-}
-
 function encrypt(text, key) {
 
-    text = cleanText(text);
-    key = cleanText(key);
+    key = key.toLowerCase().replace(/[^a-z]/g, "");
 
     if (key.length === 0) {
         return "";
     }
 
     let result = "";
+    let keyIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
 
+        const char = text[i];
+        const lowerChar = char.toLowerCase();
+
+        // Keep spaces, punctuation, numbers, emojis, etc.
+        if (!alphabet.includes(lowerChar)) {
+            result += char;
+            continue;
+        }
+
         const row =
             alphabet.indexOf(
-                key[i % key.length]
+                key[keyIndex % key.length]
             );
 
         const col =
-            alphabet.indexOf(
-                text[i]
-            );
+            alphabet.indexOf(lowerChar);
 
-        result +=
+        let encryptedChar =
             vigenereTable[row][col];
+
+        // Preserve original capitalization
+        if (char === char.toUpperCase()) {
+            encryptedChar =
+                encryptedChar.toUpperCase();
+        }
+
+        result += encryptedChar;
+
+        keyIndex++;
     }
 
     return result;
@@ -53,27 +64,47 @@ function encrypt(text, key) {
 
 function decrypt(text, key) {
 
-    text = cleanText(text);
-    key = cleanText(key);
+    key = key.toLowerCase().replace(/[^a-z]/g, "");
 
     if (key.length === 0) {
         return "";
     }
 
     let result = "";
+    let keyIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
 
+        const char = text[i];
+        const lowerChar = char.toLowerCase();
+
+        // Keep spaces, punctuation, numbers, emojis, etc.
+        if (!alphabet.includes(lowerChar)) {
+            result += char;
+            continue;
+        }
+
         const row =
             alphabet.indexOf(
-                key[i % key.length]
+                key[keyIndex % key.length]
             );
 
         const col =
             vigenereTable[row]
-            .indexOf(text[i]);
+            .indexOf(lowerChar);
 
-        result += alphabet[col];
+        let decryptedChar =
+            alphabet[col];
+
+        // Preserve original capitalization
+        if (char === char.toUpperCase()) {
+            decryptedChar =
+                decryptedChar.toUpperCase();
+        }
+
+        result += decryptedChar;
+
+        keyIndex++;
     }
 
     return result;
@@ -107,8 +138,6 @@ function copyOutput() {
 
     const output =
         document.getElementById("output");
-
-    output.select();
 
     navigator.clipboard.writeText(
         output.value
