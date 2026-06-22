@@ -1,4 +1,4 @@
-const alphabet = "abcdefghijklmnopqrstuvwxyz";
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function generateTable() {
     const table = [];
@@ -16,38 +16,36 @@ function generateTable() {
 const vigenereTable = generateTable();
 
 function cleanText(text) {
-    return text.toLowerCase();
+    return text
+        .toUpperCase()
+        .replace(/[^A-Z]/g, "");
 }
 
 function encrypt(text, key) {
 
-    text = text.toLowerCase();
-    key = key.toLowerCase();
+    text = cleanText(text);
+    key = cleanText(key);
+
+    if (key.length === 0) {
+        return "";
+    }
 
     let result = "";
-    let keyIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
 
-        const char = text[i];
-
-        if (!alphabet.includes(char)) {
-            result += char;
-            continue;
-        }
-
         const row =
             alphabet.indexOf(
-                key[keyIndex % key.length]
+                key[i % key.length]
             );
 
         const col =
-            alphabet.indexOf(char);
+            alphabet.indexOf(
+                text[i]
+            );
 
         result +=
             vigenereTable[row][col];
-
-        keyIndex++;
     }
 
     return result;
@@ -55,33 +53,27 @@ function encrypt(text, key) {
 
 function decrypt(text, key) {
 
-    text = text.toLowerCase();
-    key = key.toLowerCase();
+    text = cleanText(text);
+    key = cleanText(key);
+
+    if (key.length === 0) {
+        return "";
+    }
 
     let result = "";
-    let keyIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
 
-        const char = text[i];
-
-        if (!alphabet.includes(char)) {
-            result += char;
-            continue;
-        }
-
         const row =
             alphabet.indexOf(
-                key[keyIndex % key.length]
+                key[i % key.length]
             );
 
         const col =
             vigenereTable[row]
-            .indexOf(char);
+            .indexOf(text[i]);
 
         result += alphabet[col];
-
-        keyIndex++;
     }
 
     return result;
