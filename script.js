@@ -16,36 +16,38 @@ function generateTable() {
 const vigenereTable = generateTable();
 
 function cleanText(text) {
-    return text
-        .toLowerCase()
-        .replace(/[^A-Z]/g, "");
+    return text.toLowerCase();
 }
 
 function encrypt(text, key) {
 
-    text = cleanText(text);
-    key = cleanText(key);
-
-    if (key.length === 0) {
-        return "";
-    }
+    text = text.toLowerCase();
+    key = key.toLowerCase();
 
     let result = "";
+    let keyIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
 
+        const char = text[i];
+
+        if (!alphabet.includes(char)) {
+            result += char;
+            continue;
+        }
+
         const row =
             alphabet.indexOf(
-                key[i % key.length]
+                key[keyIndex % key.length]
             );
 
         const col =
-            alphabet.indexOf(
-                text[i]
-            );
+            alphabet.indexOf(char);
 
         result +=
             vigenereTable[row][col];
+
+        keyIndex++;
     }
 
     return result;
@@ -53,27 +55,33 @@ function encrypt(text, key) {
 
 function decrypt(text, key) {
 
-    text = cleanText(text);
-    key = cleanText(key);
-
-    if (key.length === 0) {
-        return "";
-    }
+    text = text.toLowerCase();
+    key = key.toLowerCase();
 
     let result = "";
+    let keyIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
 
+        const char = text[i];
+
+        if (!alphabet.includes(char)) {
+            result += char;
+            continue;
+        }
+
         const row =
             alphabet.indexOf(
-                key[i % key.length]
+                key[keyIndex % key.length]
             );
 
         const col =
             vigenereTable[row]
-            .indexOf(text[i]);
+            .indexOf(char);
 
         result += alphabet[col];
+
+        keyIndex++;
     }
 
     return result;
