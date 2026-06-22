@@ -17,7 +17,7 @@ const vigenereTable = generateTable();
 
 function cleanText(text) {
     return text
-        .toUpperCase()
+        .toLowerCase()
         .replace(/[^A-Z]/g, "");
 }
 
