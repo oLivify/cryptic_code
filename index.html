@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecretMessages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,28 +13,40 @@
 
     <h1>Secret Messages</h1>
 
-    <div class="input-container">
-        <span>🔑</span>
-        <input type="text" id="key" placeholder="Enter Secret Key">
-    </div>
+    <input
+        type="text"
+        id="key"
+        placeholder="Enter Secret Key"
+    >
 
-    <div class="input-container">
-        <span>💬</span>
-        <textarea id="input" placeholder="Enter Message"></textarea>
-    </div>
+    <textarea
+        id="input"
+        placeholder="Enter Message"
+    ></textarea>
 
     <div class="buttons">
-        <button onclick="encryptMessage()">Encrypt</button>
-        <button onclick="decryptMessage()">Decrypt</button>
-        <button onclick="clearAll()">Clear</button>
+        <button onclick="encryptMessage()">
+            Encrypt
+        </button>
+
+        <button onclick="decryptMessage()">
+            Decrypt
+        </button>
+
+        <button onclick="clearAll()">
+            Clear
+        </button>
     </div>
 
-    <div class="input-container">
-        <span>🔒</span>
-        <textarea id="output" readonly placeholder="Result"></textarea>
-    </div>
+    <textarea
+        id="output"
+        readonly
+        placeholder="Result"
+    ></textarea>
 
-    <button onclick="copyOutput()">Copy Result</button>
+    <button onclick="copyOutput()">
+        Copy Result
+    </button>
 
 </div>
 
