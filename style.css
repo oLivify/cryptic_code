@@ -1,44 +1,98 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #121212;
-    color: white;
     margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #00ff41;
+    font-family: "Courier New", monospace;
 }
 
 .container {
-    max-width: 700px;
-    margin: auto;
+    max-width: 800px;
+    margin: 40px auto;
     padding: 25px;
+    border: 2px solid #00ff41;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ff41;
+    background-color: #050505;
 }
 
 h1 {
     text-align: center;
+    text-shadow: 0 0 10px #00ff41;
+    margin-bottom: 25px;
 }
 
 input,
 textarea {
     width: 100%;
     box-sizing: border-box;
+    background-color: #000000;
+    color: #00ff41;
+    border: 1px solid #00ff41;
+    border-radius: 5px;
     padding: 12px;
-    margin-top: 10px;
     margin-bottom: 15px;
-    border-radius: 8px;
-    border: none;
+    font-family: "Courier New", monospace;
+    font-size: 16px;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 10px #00ff41;
 }
 
 textarea {
-    min-height: 140px;
-}
-
-button {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    min-height: 150px;
+    resize: vertical;
 }
 
 .buttons {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
+}
+
+button {
+    flex: 1;
+    background-color: #000000;
+    color: #00ff41;
+    border: 1px solid #00ff41;
+    border-radius: 5px;
+    padding: 12px;
+    cursor: pointer;
+    font-family: "Courier New", monospace;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: #00ff41;
+    color: #000000;
+    box-shadow: 0 0 15px #00ff41;
+    transform: scale(1.03);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+::placeholder {
+    color: #00aa33;
+}
+
+#output {
+    border: 2px solid #00ff41;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00ff41;
 }
