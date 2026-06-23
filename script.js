@@ -15,7 +15,26 @@ document.documentElement.style
   .setProperty("--hacker", randomColor);
 
 
+async function pasteMessage() {
 
+    try {
+
+        const text =
+            await navigator.clipboard.readText();
+
+        document.getElementById(
+            "input"
+        ).value = text;
+
+        showNotification("Pasted");
+
+    } catch (err) {
+
+        showNotification("Paste Failed");
+
+        console.error(err);
+    }
+}
 
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
