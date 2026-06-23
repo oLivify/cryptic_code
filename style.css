@@ -7,9 +7,10 @@ body {
 }
 
 .container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 25px;
+    width: 95%;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
     border: 2px solid #00ff41;
     border-radius: 10px;
     box-shadow: 0 0 20px #00ff41;
