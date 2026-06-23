@@ -251,3 +251,62 @@ function logOperation(operation) {
 
     history.prepend(entry);
 }
+
+function logOperation(operation) {
+
+    const history =
+        JSON.parse(
+            localStorage.getItem("cipherHistory")
+        ) || [];
+
+    const now =
+        new Date().toLocaleTimeString();
+
+    history.unshift(
+        `[${now}] ${operation}`
+    );
+
+   history.splice(20);
+
+    localStorage.setItem(
+        "cipherHistory",
+        JSON.stringify(history)
+    );
+
+    renderHistory();
+}
+
+
+function renderHistory() {
+
+    const historyDiv =
+        document.getElementById("history");
+
+    const history =
+        JSON.parse(
+            localStorage.getItem("cipherHistory")
+        ) || [];
+
+    historyDiv.innerHTML = "";
+
+    history.forEach(entry => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "history-entry";
+
+        div.textContent =
+            entry;
+
+        historyDiv.appendChild(div);
+    });
+}
+
+
+
+//always last thing
+window.onload = function() {
+    renderHistory();
+};
