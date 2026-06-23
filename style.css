@@ -8,6 +8,11 @@ body {
     background-color: #000000;
     color: var(--hacker);
     font-family: "Courier New", monospace;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 .container {
@@ -27,6 +32,22 @@ h1 {
     margin-bottom: 25px;
 }
 
+/* --- Stacked Emoji Layout Containers --- */
+.input-container {
+    display: flex;
+    flex-direction: column; /* Stacks emoji directly above the text element */
+    gap: 6px;               /* Clean spacing between emoji and input */
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.input-container span {
+    font-size: 1.3rem;
+    user-select: none;
+    align-self: flex-start; /* Keeps emoji aligned to the left side */
+}
+
+/* Core Form Elements */
 input,
 textarea {
     width: 100%;
@@ -36,9 +57,8 @@ textarea {
     border: 1px solid var(--hacker);
     border-radius: 5px;
     padding: 12px;
-    margin-bottom: 15px;
     font-family: "Courier New", monospace;
-    font-size: 16px;
+    font-size: 16px; /* Prevents forced iOS auto-zoom */
 }
 
 input:focus,
@@ -48,14 +68,15 @@ textarea:focus {
 }
 
 textarea {
-    min-height: 150px;
+    min-height: 140px;
     resize: vertical;
 }
 
+/* Layout for Action Buttons */
 .buttons {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 button {
@@ -71,11 +92,17 @@ button {
     transition: all 0.2s ease;
 }
 
+/* Standalone Copy button at the bottom */
+.container > button {
+    display: block;
+    width: 100%;
+}
+
 button:hover {
     background-color: var(--hacker);
     color: #000000;
     box-shadow: 0 0 15px var(--hacker);
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 button:active {
@@ -102,35 +129,35 @@ button:active {
     background: var(--hacker);
 }
 
-/* iPhone / Mobile Optimization */
-
+/* --- iPhone / Mobile Optimization --- */
 @media (max-width: 768px) {
-
     body {
-        padding: 10px;
+        padding: 5px;
     }
 
     .container {
         margin: 10px auto;
-        padding: 15px;
+        padding: 15px 12px;
         width: 100%;
+        border-radius: 8px;
     }
 
     .buttons {
         flex-direction: column;
+        gap: 8px;
     }
 
     button {
         width: 100%;
-        margin-bottom: 10px;
+        padding: 14px; /* Larger tap targets for mobile fingers */
     }
-
-    input,
+    
     textarea {
-        font-size: 16px;
+        min-height: 110px;
     }
 
     h1 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
     }
 }
