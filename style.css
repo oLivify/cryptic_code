@@ -1,8 +1,12 @@
+:root {
+    --hacker: #00ff41; /* overwritten by script.js on every page load */
+}
+
 body {
     margin: 0;
     padding: 0;
     background-color: #000000;
-    color: #00ff41;
+    color: var(--hacker);
     font-family: "Courier New", monospace;
 }
 
@@ -11,15 +15,15 @@ body {
     max-width: 700px;
     margin: 20px auto;
     padding: 20px;
-    border: 2px solid #00ff41;
+    border: 2px solid var(--hacker);
     border-radius: 10px;
-    box-shadow: 0 0 20px #00ff41;
+    box-shadow: 0 0 20px var(--hacker);
     background-color: #050505;
 }
 
 h1 {
     text-align: center;
-    text-shadow: 0 0 10px #00ff41;
+    text-shadow: 0 0 10px var(--hacker);
     margin-bottom: 25px;
 }
 
@@ -28,8 +32,8 @@ textarea {
     width: 100%;
     box-sizing: border-box;
     background-color: #000000;
-    color: #00ff41;
-    border: 1px solid #00ff41;
+    color: var(--hacker);
+    border: 1px solid var(--hacker);
     border-radius: 5px;
     padding: 12px;
     margin-bottom: 15px;
@@ -40,7 +44,7 @@ textarea {
 input:focus,
 textarea:focus {
     outline: none;
-    box-shadow: 0 0 10px #00ff41;
+    box-shadow: 0 0 10px var(--hacker);
 }
 
 textarea {
@@ -57,8 +61,8 @@ textarea {
 button {
     flex: 1;
     background-color: #000000;
-    color: #00ff41;
-    border: 1px solid #00ff41;
+    color: var(--hacker);
+    border: 1px solid var(--hacker);
     border-radius: 5px;
     padding: 12px;
     cursor: pointer;
@@ -68,9 +72,9 @@ button {
 }
 
 button:hover {
-    background-color: #00ff41;
+    background-color: var(--hacker);
     color: #000000;
-    box-shadow: 0 0 15px #00ff41;
+    box-shadow: 0 0 15px var(--hacker);
     transform: scale(1.03);
 }
 
@@ -79,11 +83,11 @@ button:active {
 }
 
 ::placeholder {
-    color: #00aa33;
+    color: color-mix(in srgb, var(--hacker) 60%, black);
 }
 
 #output {
-    border: 2px solid #00ff41;
+    border: 2px solid var(--hacker);
 }
 
 ::-webkit-scrollbar {
@@ -95,7 +99,7 @@ button:active {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #00ff41;
+    background: var(--hacker);
 }
 
 /* iPhone / Mobile Optimization */
