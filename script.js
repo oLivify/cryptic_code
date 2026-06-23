@@ -1,3 +1,23 @@
+const HACKER_COLORS = [
+  "#00ff41", // classic matrix green
+  "#00ffff", // cyan
+  "#00aaff", // electric blue
+  "#ff00ff", // hot magenta
+  "#ffb300", // amber terminal
+  "#ff3131", // red alert
+  "#e8ffe8", // phosphor white
+];
+
+const randomColor =
+  HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
+
+document.documentElement.style
+  .setProperty("--hacker", randomColor);
+
+
+
+
+
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 function generateTable() {
