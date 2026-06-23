@@ -5,63 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecretMessages</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Mobile-first scaling adjustments */
-        body {
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px; /* Caps the size on desktop so it looks like a clean mobile app */
-            margin: 0 auto;
-            box-sizing: border-box;
-        }
-
-        .input-container {
-            width: 100%;
-        }
-
-        /* Makes text inputs highly tappable and legible on mobile screens */
-        input[type="text"], textarea {
-            font-size: 16px !important; /* Prevents iOS/Android from auto-zooming in when you tap the box */
-            padding: 12px;
-            border-radius: 8px;
-        }
-
-        textarea {
-            min-height: 120px; /* Gives you plenty of thumb space to type messages */
-            resize: vertical;
-        }
-
-        /* Stack buttons on tiny screens, keep them side-by-side on typical mobile layout */
-        .buttons {
-            display: flex;
-            flex-wrap: wrap; 
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .buttons button {
-            flex: 1 1 100px; /* Allows buttons to dynamically grow and fill the row evenly */
-            min-height: 44px; /* Minimum mobile touch target size for fingers */
-            padding: 10px;
-            font-size: 1rem;
-        }
-    </style>
 </head>
 <body>
 
 <div class="container">
 
-    <h1 style="text-align: center; margin-top: 0;">Secret Messages</h1>
+    <h1>Secret Messages</h1>
 
     <div class="input-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px;">
         <span style="font-size: 1.5rem;">🔑</span>
@@ -82,10 +31,10 @@
         ></textarea>
     </div>
 
-    <div class="buttons">
+    <div class="buttons" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
         <button onclick="encryptMessage()">Encrypt</button>
         <button onclick="decryptMessage()">Decrypt</button>
-        <button onclick="clearFields()">Clear</button>
+        <button onclick="clearAll()">Clear</button>
     </div>
 
     <div class="input-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px;">
@@ -98,8 +47,8 @@
         ></textarea>
     </div>
 
-    <div style="text-align: center; width: 100%;">
-        <button onclick="copyOutput()" style="width: 100%; min-height: 44px; font-size: 1rem; padding: 10px;">
+    <div style="text-align: center;">
+        <button onclick="copyOutput()">
             Copy Result
         </button>
     </div>
