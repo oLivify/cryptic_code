@@ -8,31 +8,44 @@ const HACKER_COLORS = [
   "#e8ffe8", // phosphor white
 ];
 
-const randomColor = HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
+const randomColor =
+  HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
 
-// This updates the global --hacker CSS variable variable dynamically
-document.documentElement.style.setProperty("--hacker", randomColor);
+document.documentElement.style
+  .setProperty("--hacker", randomColor);
+
+
+
+
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 function generateTable() {
     const table = [];
+
     for (let i = 0; i < 26; i++) {
-        table.push(alphabet.slice(i) + alphabet.slice(0, i));
+        table.push(
+            alphabet.slice(i) +
+            alphabet.slice(0, i)
+        );
     }
+
     return table;
 }
 
 const vigenereTable = generateTable();
 
 function encrypt(text, key) {
+
     key = key.toLowerCase().replace(/[^a-z]/g, "");
+
     if (key.length === 0) return "";
 
     let result = "";
     let keyIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
+
         const char = text[i];
         const lower = char.toLowerCase();
 
@@ -42,8 +55,12 @@ function encrypt(text, key) {
         }
 
         const textPos = alphabet.indexOf(lower);
-        const keyPos = alphabet.indexOf(key[keyIndex % key.length]);
+        const keyPos = alphabet.indexOf(
+            key[keyIndex % key.length]
+        );
+
         const encryptedPos = (textPos + keyPos) % 26;
+
         let encryptedChar = alphabet[encryptedPos];
 
         if (char >= 'A' && char <= 'Z') {
@@ -53,17 +70,21 @@ function encrypt(text, key) {
         result += encryptedChar;
         keyIndex++;
     }
+
     return result;
 }
 
 function decrypt(text, key) {
+
     key = key.toLowerCase().replace(/[^a-z]/g, "");
+
     if (key.length === 0) return "";
 
     let result = "";
     let keyIndex = 0;
 
     for (let i = 0; i < text.length; i++) {
+
         const char = text[i];
         const lower = char.toLowerCase();
 
@@ -73,8 +94,13 @@ function decrypt(text, key) {
         }
 
         const textPos = alphabet.indexOf(lower);
-        const keyPos = alphabet.indexOf(key[keyIndex % key.length]);
-        const decryptedPos = (textPos - keyPos + 26) % 26;
+        const keyPos = alphabet.indexOf(
+            key[keyIndex % key.length]
+        );
+
+        const decryptedPos =
+            (textPos - keyPos + 26) % 26;
+
         let decryptedChar = alphabet[decryptedPos];
 
         if (char >= 'A' && char <= 'Z') {
@@ -84,28 +110,50 @@ function decrypt(text, key) {
         result += decryptedChar;
         keyIndex++;
     }
+
     return result;
 }
 
 function encryptMessage() {
-    const text = document.getElementById("input").value;
-    const key = document.getElementById("key").value;
-    document.getElementById("output").value = encrypt(text, key);
+
+    const text =
+        document.getElementById("input").value;
+
+    const key =
+        document.getElementById("key").value;
+
+    document.getElementById("output").value =
+        encrypt(text, key);
 }
 
 function decryptMessage() {
-    const text = document.getElementById("input").value;
-    const key = document.getElementById("key").value;
-    document.getElementById("output").value = decrypt(text, key);
+
+    const text =
+        document.getElementById("input").value;
+
+    const key =
+        document.getElementById("key").value;
+
+    document.getElementById("output").value =
+        decrypt(text, key);
 }
 
 function copyOutput() {
-    const output = document.getElementById("output");
-    navigator.clipboard.writeText(output.value);
+
+    const output =
+        document.getElementById("output");
+
+    navigator.clipboard.writeText(
+        output.value
+    );
+
     alert("Copied!");
 }
 
+
+
 function clearAll() {
+
     document.getElementById("input").value = "";
     document.getElementById("key").value = "";
     document.getElementById("output").value = "";
