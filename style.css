@@ -39,9 +39,10 @@ textarea {
     color: var(--hacker);
     border: 1px solid var(--hacker);
     border-radius: 6px;
-    padding: clamp(10px, 2vw, 16px);
+    padding: 14px;
     font-family: inherit;
-    font-size: clamp(14px, 2vw, 18px);
+    font-size: 18px;
+    -webkit-text-size-adjust: 100%;
 }
 
 input:focus,
@@ -70,7 +71,7 @@ button {
     padding: clamp(10px, 2vw, 16px);
     cursor: pointer;
     font-family: inherit;
-    font-size: clamp(14px, 2vw, 18px);
+    font-size: 16px;
     transition: all 0.2s ease;
 }
 
