@@ -12,20 +12,26 @@
 
     <h1>Secret Messages</h1>
 
-    <div class="key-container" style="display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 15px;">
+    <!-- Key Field Container -->
+    <div class="input-container" style="display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 15px;">
         <span style="font-size: 1.2rem;">🔑</span>
         <input
             type="text"
             id="key"
             placeholder="Enter Secret Key"
-            style="margin-bottom: 0;" 
+            style="margin: 0; width: 100%;" 
         >
     </div>
 
-    <textarea
-        id="input"
-        placeholder="Enter Message"
-    ></textarea>
+    <!-- Input Message Container -->
+    <div class="input-container" style="display: flex; align-items: flex-start; gap: 8px; justify-content: center; margin-bottom: 15px;">
+        <span style="font-size: 1.2rem; margin-top: 8px;">💬</span>
+        <textarea
+            id="input"
+            placeholder="Enter Message"
+            style="margin: 0; width: 100%;"
+        ></textarea>
+    </div>
 
     <div class="buttons">
         <button onclick="encryptMessage()">
@@ -41,11 +47,16 @@
         </button>
     </div>
 
-    <textarea
-        id="output"
-        readonly
-        placeholder="Result"
-    ></textarea>
+    <!-- Output Result Container -->
+    <div class="input-container" style="display: flex; align-items: flex-start; gap: 8px; justify-content: center; margin-bottom: 15px;">
+        <span style="font-size: 1.2rem; margin-top: 8px;">🔒</span>
+        <textarea
+            id="output"
+            readonly
+            placeholder="Result"
+            style="margin: 0; width: 100%;"
+        ></textarea>
+    </div>
 
     <button onclick="copyOutput()">
         Copy Result
