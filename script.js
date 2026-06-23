@@ -161,6 +161,8 @@ function clearAll() {
     document.getElementById("input").value = "";
     //document.getElementById("key").value = "";
     document.getElementById("output").value = "";
+
+    showNotification("Cleared!");
 }
 
 function showNotification(message) {
