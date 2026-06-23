@@ -96,3 +96,36 @@ button:active {
 ::-webkit-scrollbar-thumb {
     background: #00ff41;
 }
+
+/* iPhone / Mobile Optimization */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 10px auto;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    input,
+    textarea {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
