@@ -129,3 +129,12 @@ function copyOutput() {
 
     alert("Copied!");
 }
+
+
+
+function clearAll() {
+
+    document.getElementById("input").value = "";
+    document.getElementById("key").value = "";
+    document.getElementById("output").value = "";
+}
