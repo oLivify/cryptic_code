@@ -123,7 +123,9 @@ function encryptMessage() {
         document.getElementById("key").value;
 
     document.getElementById("output").value =
-        encrypt(text, key);
+    encrypt(text, key);
+
+    showNotification("Message Encrypted");
 }
 
 function decryptMessage() {
@@ -136,6 +138,8 @@ function decryptMessage() {
 
     document.getElementById("output").value =
         decrypt(text, key);
+
+  showNotification("Message Decrypted");
 }
 
 function copyOutput() {
@@ -147,7 +151,7 @@ function copyOutput() {
         output.value
     );
 
-    alert("Copied!");
+    showNotification("Copied!");
 }
 
 
@@ -157,6 +161,27 @@ function clearAll() {
     document.getElementById("input").value = "";
     //document.getElementById("key").value = "";
     document.getElementById("output").value = "";
+}
+
+function showNotification(message) {
+
+    const notification =
+        document.getElementById(
+            "notification"
+        );
+
+    notification.textContent =
+        message;
+
+    notification.classList.add(
+        "show"
+    );
+
+    setTimeout(() => {
+        notification.classList.remove(
+            "show"
+        );
+    }, 2500);
 }
 
 function generateRandomKey() {
