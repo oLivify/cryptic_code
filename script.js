@@ -158,3 +158,25 @@ function clearAll() {
     document.getElementById("key").value = "";
     document.getElementById("output").value = "";
 }
+
+function generateRandomKey() {
+
+    const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    // Random length between 5 and 25
+    const length =
+        Math.floor(Math.random() * 21) + 5;
+
+    let key = "";
+
+    for (let i = 0; i < length; i++) {
+
+        key += alphabet[
+            Math.floor(
+                Math.random() * alphabet.length
+            )
+        ];
+    }
+
+    document.getElementById("key").value = key;
+}
