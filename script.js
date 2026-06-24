@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
 async function pasteMessage() {
 
     try {
@@ -140,6 +141,7 @@ function encryptMessage() {
     encrypt(text, key);
 
     showNotification("Message Encrypted");
+    logOperation("Encrypted Message");
 }
 
 function decryptMessage() {
@@ -154,6 +156,7 @@ function decryptMessage() {
         decrypt(text, key);
 
   showNotification("Message Decrypted");
+  logOperation("Decrypted Message");
 }
 
 function copyOutput() {
@@ -166,6 +169,7 @@ function copyOutput() {
     );
 
     showNotification("Copied!");
+    logOperation("Copied Message");
 }
 
 
@@ -177,6 +181,7 @@ function clearAll() {
     document.getElementById("output").value = "";
 
     showNotification("Cleared!");
+    logOperation("Cleared Terminal");
 }
 
 function showNotification(message) {
@@ -221,3 +226,83 @@ function generateRandomKey() {
 
     document.getElementById("key").value = key;
 }
+
+function logOperation(operation) {
+
+    const history =
+        document.getElementById("history");
+
+    const now = new Date();
+
+    const timestamp =
+        now.toLocaleTimeString();
+
+    const entry =
+        document.createElement("div");
+
+    entry.className = "history-entry";
+
+    entry.textContent =
+        `[${timestamp}] ${operation}`;
+
+    history.prepend(entry);
+}
+
+function logOperation(operation) {
+
+    const history =
+        JSON.parse(
+            localStorage.getItem("cipherHistory")
+        ) || [];
+
+    const now =
+        new Date().toLocaleTimeString();
+
+    history.unshift(
+        `[${now}] ${operation}`
+    );
+
+   history.splice(20);
+
+    localStorage.setItem(
+        "cipherHistory",
+        JSON.stringify(history)
+    );
+
+    renderHistory();
+}
+
+
+function renderHistory() {
+
+    const historyDiv =
+        document.getElementById("history");
+
+    const history =
+        JSON.parse(
+            localStorage.getItem("cipherHistory")
+        ) || [];
+
+    historyDiv.innerHTML = "";
+
+    history.forEach(entry => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "history-entry";
+
+        div.textContent =
+            entry;
+
+        historyDiv.appendChild(div);
+    });
+}
+
+
+
+//always last thing
+window.onload = function() {
+    renderHistory();
+};

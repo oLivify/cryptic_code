@@ -241,3 +241,19 @@ button:active {
     opacity: 1;
     transform: translateX(0);
 }
+
+#history {
+    margin-top: 15px;
+    border: 1px solid var(--hacker);
+    border-radius: 6px;
+    padding: 10px;
+    min-height: 100px;
+    max-height: 250px;
+    overflow-y: auto;
+    background: #000;
+}
+
+.history-entry {
+    padding: 6px;
+    border-bottom: 1px solid rgba(0,255,65,0.25);
+}
