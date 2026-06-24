@@ -226,79 +226,79 @@ function generateRandomKey() {
 
     document.getElementById("key").value = key;
 }
+//history stuff ~~dont use~~
+// function logOperation(operation) {
 
-function logOperation(operation) {
+//     const history =
+//         document.getElementById("history");
 
-    const history =
-        document.getElementById("history");
+//     const now = new Date();
 
-    const now = new Date();
+//     const timestamp =
+//         now.toLocaleTimeString();
 
-    const timestamp =
-        now.toLocaleTimeString();
+//     const entry =
+//         document.createElement("div");
 
-    const entry =
-        document.createElement("div");
+//     entry.className = "history-entry";
 
-    entry.className = "history-entry";
+//     entry.textContent =
+//         `[${timestamp}] ${operation}`;
 
-    entry.textContent =
-        `[${timestamp}] ${operation}`;
+//     history.prepend(entry);
+// }
 
-    history.prepend(entry);
-}
+// function logOperation(operation) {
 
-function logOperation(operation) {
+//     const history =
+//         JSON.parse(
+//             localStorage.getItem("cipherHistory")
+//         ) || [];
 
-    const history =
-        JSON.parse(
-            localStorage.getItem("cipherHistory")
-        ) || [];
+//     const now =
+//         new Date().toLocaleTimeString();
 
-    const now =
-        new Date().toLocaleTimeString();
+//     history.unshift(
+//         `[${now}] ${operation}`
+//     );
 
-    history.unshift(
-        `[${now}] ${operation}`
-    );
+//    history.splice(20);
 
-   history.splice(20);
+//     localStorage.setItem(
+//         "cipherHistory",
+//         JSON.stringify(history)
+//     );
 
-    localStorage.setItem(
-        "cipherHistory",
-        JSON.stringify(history)
-    );
-
-    renderHistory();
-}
+//     renderHistory();
+// }
 
 
-function renderHistory() {
+// function renderHistory() {
 
-    const historyDiv =
-        document.getElementById("history");
+//     const historyDiv =
+//         document.getElementById("history");
 
-    const history =
-        JSON.parse(
-            localStorage.getItem("cipherHistory")
-        ) || [];
+//     const history =
+//         JSON.parse(
+//             localStorage.getItem("cipherHistory")
+//         ) || [];
 
-    historyDiv.innerHTML = "";
+//     historyDiv.innerHTML = "";
 
-    history.forEach(entry => {
+//     history.forEach(entry => {
 
-        const div =
-            document.createElement("div");
+//         const div =
+//             document.createElement("div");
 
-        div.className =
-            "history-entry";
+//         div.className =
+//             "history-entry";
 
-        div.textContent =
-            entry;
+//         div.textContent =
+//             entry;
 
-        historyDiv.appendChild(div);
-    });
-}
+//         historyDiv.appendChild(div);
+//     });
+// }
 
 
 
