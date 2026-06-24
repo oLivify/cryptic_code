@@ -6,6 +6,17 @@ const HACKER_COLORS = [
   "#ffb300", // amber terminal
   "#ff3131", // red alert
   "#e8ffe8", // phosphor white
+  
+  // --- New Additions ---
+  "#39ff14", // neon lime green
+  "#9d00ff", // dark cyber purple
+  "#ff5e00", // hazmat orange
+  "#00ffaa", // radioactive teal
+  "#ff0055", // synthwave pink
+  "#bcff00", // toxic venom yellow
+  "#1ad1d1", // terminal turquoise
+  "#7b2cbf", // deep void purple
+  "#ffff00", // laser yellow
 ];
 
 const randomColor =
