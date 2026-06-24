@@ -1,29 +1,13 @@
-const HACKER_COLORS = [
-  "#00ff41", // classic matrix green
-  "#00ffff", // cyan
-  "#00aaff", // electric blue
-  "#ff00ff", // hot magenta
-  "#ffb300", // amber terminal
-  "#ff3131", // red alert
-  "#e8ffe8", // phosphor white
-  
-  // --- New Additions ---
-  "#39ff14", // neon lime green
-  "#9d00ff", // dark cyber purple
-  "#ff5e00", // hazmat orange
-  "#00ffaa", // radioactive teal
-  "#ff0055", // synthwave pink
-  "#bcff00", // toxic venom yellow
-  "#1ad1d1", // terminal turquoise
-  "#7b2cbf", // deep void purple
-  "#ffff00", // laser yellow
-];
+document.addEventListener("DOMContentLoaded", () => {
+  const HACKER_COLORS = [
+    "#00ff41", "#00ffff", "#00aaff", "#ff00ff", "#ffb300", "#ff3131", "#e8ffe8",
+    "#39ff14", "#9d00ff", "#ff5e00", "#00ffaa", "#ff0055", "#bcff00", "#1ad1d1", 
+    "#7b2cbf", "#ffff00"
+  ];
 
-const randomColor =
-  HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
-
-document.documentElement.style
-  .setProperty("--hacker", randomColor);
+  const randomColor = HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
+  document.documentElement.style.setProperty("--hacker", randomColor);
+});
 
 
 async function pasteMessage() {
