@@ -303,6 +303,6 @@ function renderHistory() {
 
 
 //always last thing
-window.onload = function() {
-    renderHistory();
-};
+// window.onload = function() {
+//     renderHistory();
+// };
