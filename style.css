@@ -1,59 +1,33 @@
-/* Base styles to prevent layout shifts */
-body {
-  background-color: #0d0d0d;
-  margin: 0;
-  overflow-x: hidden;
-}
-
-/* 1. Terminal Boot Overlay (Flash Effect) */
+/* 1. Terminal Boot Overlay (Continuous Scanline Effect) */
 body::before {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 8px; /* Gives the flash a distinct line/bar shape */
   background: var(--hacker, #00ff41);
-  opacity: 0;
+  opacity: 0.2; /* Kept subtle so your text remains readable */
+  box-shadow: 0 0 15px var(--hacker), 0 0 30px var(--hacker); /* Gives it a neon glow */
   z-index: 9999;
   pointer-events: none;
-  animation: terminal-flash 0.4s ease-out;
-}
-
-/* 2. Main Container Initial State */
-#app-container {
-  opacity: 0;
-  transform: translateY(20px);
-  filter: blur(5px);
-  animation: boot-up 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  animation-delay: 0.3s; /* Waits slightly for the flash to finish */
+  
+  /* Added 'linear' for constant speed, 'infinite' to loop, and 'alternate' to go back up */
+  animation: terminal-scan 4s linear infinite alternate; 
 }
 
 /* --- Animation Keyframes --- */
-@keyframes terminal-flash {
+@keyframes terminal-scan {
   0% {
-    opacity: 0.3;
-    height: 0vh;
+    transform: translateY(-10vh); /* Starts just off the top of the screen */
+    opacity: 0.1;
   }
   50% {
-    opacity: 0.5;
-    height: 100vh;
+    opacity: 0.3; /* Brightens slightly in the middle of the screen */
   }
   100% {
-    opacity: 0;
-  }
-}
-
-@keyframes boot-up {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-    filter: blur(5px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+    transform: translateY(110vh); /* Ends just past the bottom of the screen */
+    opacity: 0.1;
   }
 }
 
