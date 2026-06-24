@@ -1,13 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const HACKER_COLORS = [
+const HACKER_COLORS = [
     "#00ff41", "#00ffff", "#00aaff", "#ff00ff", "#ffb300", "#ff3131", "#e8ffe8",
     "#39ff14", "#9d00ff", "#ff5e00", "#00ffaa", "#ff0055", "#bcff00", "#1ad1d1", 
     "#7b2cbf", "#ffff00"
   ];
 
-  const randomColor = HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
-  document.documentElement.style.setProperty("--hacker", randomColor);
-});
+const randomColor = HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
+document.documentElement.style.setProperty("--hacker", randomColor);
+
 
 
 
