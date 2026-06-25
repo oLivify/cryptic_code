@@ -141,7 +141,6 @@ function encryptMessage() {
     
     copyOutput();
     showNotification("Message Encrypted & Copied");
-    //logOperation("Encrypted Message");
     
 }
 
@@ -157,7 +156,6 @@ function decryptMessage() {
         decrypt(text, key);
 
   showNotification("Message Decrypted");
-  //logOperation("Decrypted Message");
 }
 
 function copyOutput() {
@@ -170,7 +168,6 @@ function copyOutput() {
     );
 
     //showNotification("Copied!");
-    //logOperation("Copied Message");
 }
 
 
@@ -182,7 +179,6 @@ function clearAll() {
     document.getElementById("output").value = "";
 
     showNotification("Cleared!");
-    //logOperation("Cleared Terminal");
 }
 
 function showNotification(message) {
