@@ -173,14 +173,14 @@ function encryptMessage() {
     document.getElementById("output").value = encrypted;
     document.getElementById("modalOutput").value = encrypted;
     
-    resizeOutputBox();
+    
     
     //copyOutput();
     openModal();
     //showNotification("Message Encrypted");
+    requestAnimationFrame(resizeOutputBox);
     
 }
-
 function decryptMessage() {
     //pasteMessage();
 
