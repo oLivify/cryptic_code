@@ -23,13 +23,10 @@ function closeModal() {
 
 function resizeOutputBox() {
 
-    const output =
-        document.getElementById("modalOutput");
+    const output = document.getElementById("modalOutput");
 
-    output.style.height = "auto";
-
-    output.style.height =
-        output.scrollHeight + "px";
+    output.style.height = "0px";
+    output.style.height = output.scrollHeight + "px";
 }
 
 
