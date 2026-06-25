@@ -33,11 +33,11 @@ async function pasteMessage() {
             "input"
         ).value = text;
 
-        showNotification("Pasted");
+        //showNotification("Pasted");
 
     } catch (err) {
 
-        showNotification("Paste Failed");
+        //showNotification("Paste Failed");
 
         console.error(err);
     }
@@ -160,12 +160,15 @@ function encryptMessage() {
     const key =
         document.getElementById("key").value;
 
-    document.getElementById("output").value =
-    encrypt(text, key);
+    const encrypted = encrypt(text, key);
+
+    document.getElementById("output").value = encrypted;
+    document.getElementById("modalOutput").value = encrypted;
+
     
     //copyOutput();
     openModal();
-    showNotification("Message Encrypted");
+    //showNotification("Message Encrypted");
     
 }
 
@@ -181,7 +184,7 @@ function decryptMessage() {
     document.getElementById("output").value =
         decrypt(text, key);
 
-  showNotification("Message Decrypted");
+  //showNotification("Message Decrypted");
 }
 
 function copyOutput() {
@@ -193,7 +196,7 @@ function copyOutput() {
         output.value
     );
 
-    showNotification("Copied!");
+    //showNotification("Copied!");
 }
 
 
@@ -204,7 +207,7 @@ function clearAll() {
     //document.getElementById("key").value = "";
     document.getElementById("output").value = "";
 
-    showNotification("Cleared!");
+    //showNotification("Cleared!");
 }
 
 function showNotification(message) {
