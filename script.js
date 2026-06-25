@@ -226,14 +226,14 @@ function generateRandomKey() {
     document.getElementById("key").value = key;
 }
 
-function toggleKeyVisibility() {
-    const keyInput = document.getElementById("key");
-    if (keyInput.type === "password") {
-        keyInput.type = "text";
-    } else {
-        keyInput.type = "password";
-    }
-}
+// function toggleKeyVisibility() {
+//     const keyInput = document.getElementById("key");
+//     if (keyInput.type === "password") {
+//         keyInput.type = "text";
+//     } else {
+//         keyInput.type = "password";
+//     }
+// }
 
 
 //history stuff ~~dont use~~
