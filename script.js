@@ -139,13 +139,13 @@ function encryptMessage() {
     document.getElementById("output").value =
     encrypt(text, key);
     
-    copyOutput();
+    //copyOutput();
     showNotification("Message Encrypted & Copied");
     
 }
 
 function decryptMessage() {
-    pasteMessage();
+    //pasteMessage();
 
     const text =
         document.getElementById("input").value;
@@ -168,7 +168,7 @@ function copyOutput() {
         output.value
     );
 
-    //showNotification("Copied!");
+    showNotification("Copied!");
 }
 
 
