@@ -46,7 +46,7 @@ async function pasteMessage() {
 async function shareMessage() {
     if (navigator.share) {
         await navigator.share({
-            title: "CipherChat",
+            title: "Secret Messages",
             text: document.getElementById("output").value
         });
     } else {
