@@ -140,7 +140,7 @@ function encryptMessage() {
     encrypt(text, key);
     
     //copyOutput();
-    showNotification("Message Encrypted & Copied");
+    showNotification("Message Encrypted");
     
 }
 
