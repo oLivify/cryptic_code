@@ -46,9 +46,9 @@ textarea {
 }
 
 #modalOutput {
-    min-height: 0;
-    height: 80px;
-    max-height: 250px;
+    width: 100%;
+    min-height: 80px;
+    max-height: 300px; /* or remove this line entirely */
     resize: none;
     overflow-y: auto;
 }
