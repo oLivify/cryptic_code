@@ -45,6 +45,14 @@ textarea {
     -webkit-text-size-adjust: 100%;
 }
 
+#modalOutput {
+    min-height: 0;
+    height: 80px;
+    max-height: 250px;
+    resize: none;
+    overflow-y: auto;
+}
+
 input:focus,
 textarea:focus {
     outline: none;
