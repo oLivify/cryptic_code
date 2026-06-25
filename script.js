@@ -21,6 +21,17 @@ function closeModal() {
         .classList.add("hidden");
 }
 
+function resizeOutputBox() {
+
+    const output =
+        document.getElementById("modalOutput");
+
+    output.style.height = "auto";
+
+    output.style.height =
+        output.scrollHeight + "px";
+}
+
 
 async function pasteMessage() {
 
@@ -164,7 +175,8 @@ function encryptMessage() {
 
     document.getElementById("output").value = encrypted;
     document.getElementById("modalOutput").value = encrypted;
-
+    
+    resizeOutputBox();
     
     //copyOutput();
     openModal();
