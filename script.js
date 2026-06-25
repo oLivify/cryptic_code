@@ -7,7 +7,19 @@ const HACKER_COLORS = [
 const randomColor = HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
 document.documentElement.style.setProperty("--hacker", randomColor);
 
+function openModal() {
 
+    document
+        .getElementById("successModal")
+        .classList.remove("hidden");
+}
+
+function closeModal() {
+
+    document
+        .getElementById("successModal")
+        .classList.add("hidden");
+}
 
 
 async function pasteMessage() {
@@ -30,6 +42,18 @@ async function pasteMessage() {
         console.error(err);
     }
 }
+
+async function shareMessage() {
+    if (navigator.share) {
+        await navigator.share({
+            title: "CipherChat",
+            text: document.getElementById("output").value
+        });
+    } else {
+        copyOutput();
+    }
+}
+
 
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -140,6 +164,7 @@ function encryptMessage() {
     encrypt(text, key);
     
     //copyOutput();
+    openModal();
     showNotification("Message Encrypted");
     
 }
