@@ -48,7 +48,7 @@ textarea {
 #modalOutput {
     width: 100%;
     min-height: 80px;
-    max-height: 300px; /* or remove this line entirely */
+    max-height: 250px;
     resize: none;
     overflow-y: auto;
 }
