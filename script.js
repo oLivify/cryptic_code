@@ -145,6 +145,7 @@ function encryptMessage() {
 }
 
 function decryptMessage() {
+    pasteMessage();
 
     const text =
         document.getElementById("input").value;
