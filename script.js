@@ -52,7 +52,7 @@ function copyDecrypted() {
         document.getElementById("decryptModalOutput").value
     );
 
-    showNotification("Copied!");
+    //showNotification("Copied!");
 }
 
 
