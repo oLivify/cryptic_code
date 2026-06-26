@@ -33,6 +33,42 @@ function resizeOutputBox() {
 }
 
 
+function openDecryptModal() {
+
+    document
+        .getElementById("decryptModal")
+        .classList.remove("hidden");
+
+    requestAnimationFrame(resizeDecryptBox);
+}
+
+function closeDecryptModal() {
+
+    document
+        .getElementById("decryptModal")
+        .classList.add("hidden");
+}
+
+function resizeDecryptBox() {
+
+    const output =
+        document.getElementById("decryptModalOutput");
+
+    output.style.height = "auto";
+    output.style.height =
+        output.scrollHeight + "px";
+}
+
+function copyDecrypted() {
+
+    navigator.clipboard.writeText(
+        document.getElementById("decryptModalOutput").value
+    );
+
+    showNotification("Copied!");
+}
+
+
 async function pasteMessage() {
 
     try {
@@ -186,7 +222,6 @@ function encryptMessage() {
 
 
 function decryptMessage() {
-    //pasteMessage();
 
     const text =
         document.getElementById("input").value;
@@ -194,10 +229,16 @@ function decryptMessage() {
     const key =
         document.getElementById("key").value;
 
-    document.getElementById("output").value =
+    const decrypted =
         decrypt(text, key);
 
-  //showNotification("Message Decrypted");
+    document.getElementById("output").value =
+        decrypted;
+
+    document.getElementById("decryptModalOutput").value =
+        decrypted;
+
+    openDecryptModal();
 }
 
 function copyOutput() {

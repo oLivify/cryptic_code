@@ -70,6 +70,25 @@
 
     <div id="successModal" class="modal hidden">
 
+    <div id="decryptModal" class="modal hidden">
+
+
+    <div class="modal-content">
+
+        <h2>Decryption Complete</h2>
+
+        <p>Your message has been decrypted successfully.</p>
+
+        <textarea id="decryptModalOutput" readonly></textarea>
+
+        <button onclick="copyDecrypted()">Copy Message</button>
+        <button onclick="clearAll(); closeDecryptModal();">Clear</button>
+        <button onclick="closeDecryptModal()">Close</button>
+
+    </div>
+
+    </div>    
+
     <div class="modal-content">
 
         <h2>Encryption Complete</h2>
