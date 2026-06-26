@@ -25,7 +25,10 @@ function resizeOutputBox() {
 
     const output = document.getElementById("modalOutput");
 
-    output.style.height = "0px";
+    // Force reset first
+    output.style.height = "auto";
+
+    // Then set to real content height
     output.style.height = output.scrollHeight + "px";
 }
 
@@ -172,15 +175,16 @@ function encryptMessage() {
 
     document.getElementById("output").value = encrypted;
     document.getElementById("modalOutput").value = encrypted;
-    
-    
-    
-    //copyOutput();
+
     openModal();
-    //showNotification("Message Encrypted");
-    requestAnimationFrame(resizeOutputBox);
-    
+
+    // IMPORTANT: wait until modal is visible
+    requestAnimationFrame(() => {
+        requestAnimationFrame(resizeOutputBox);
+    });
 }
+
+
 function decryptMessage() {
     //pasteMessage();
 
