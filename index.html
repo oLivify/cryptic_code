@@ -68,10 +68,49 @@
 <div id="history"></div> -->
 
 
-    <div id="successModal" class="modal hidden">
+    <!-- ========================= -->
+<!-- Encryption Modal -->
+<!-- ========================= -->
 
-    <div id="decryptModal" class="modal hidden">
+<div id="successModal" class="modal hidden">
 
+    <div class="modal-content">
+
+        <h2>Encryption Complete</h2>
+
+        <p>Your message has been encrypted successfully.</p>
+
+        <textarea
+            id="modalOutput"
+            class="modal-text"
+            readonly
+        ></textarea>
+
+        <button onclick="copyOutput()">
+            Copy Message
+        </button>
+
+        <button onclick="shareMessage()">
+            Share
+        </button>
+
+        <button onclick="clearAll(); closeModal();">
+            Clear
+        </button>
+
+        <button onclick="closeModal()">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- Decryption Modal -->
+<!-- ========================= -->
+
+<div id="decryptModal" class="modal hidden">
 
     <div class="modal-content">
 
@@ -79,7 +118,11 @@
 
         <p>Your message has been decrypted successfully.</p>
 
-        <textarea id="decryptModalOutput" readonly></textarea>
+        <textarea
+            id="decryptModalOutput"
+            class="modal-text"
+            readonly
+        ></textarea>
 
         <button onclick="copyDecrypted()">Copy Message</button>
         <button onclick="clearAll(); closeDecryptModal();">Clear</button>
@@ -87,28 +130,11 @@
 
     </div>
 
-    </div>    
-
-    <div class="modal-content">
-
-        <h2>Encryption Complete</h2>
-
-        <p>Your message has been encrypted successfully.</p>
-        <textarea id="modalOutput" readonly></textarea>
-        <button onclick="copyOutput()"> Copy Message</button>
-        <button onclick="shareMessage()"> Share</button>
-        <button onclick="clearAll(); closeModal();">Clear</button>
-        <button onclick="closeModal()">Close</button>
-
-    </div>
-
-</div>
-    
 </div>
 
 <script src="script.js"></script>
 
-    <div id="notification"></div>
+<div id="notification"></div>
 
 </body>
 </html>
