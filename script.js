@@ -21,15 +21,12 @@ function closeModal() {
         .classList.add("hidden");
 }
 
-function resizeOutputBox() {
+function autoResizeTextarea(textarea) {
 
-    const output = document.getElementById("modalOutput");
+    textarea.style.height = "auto";
 
-    // Force reset first
-    output.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
 
-    // Then set to real content height
-    output.style.height = output.scrollHeight + "px";
 }
 
 
@@ -47,16 +44,6 @@ function closeDecryptModal() {
     document
         .getElementById("decryptModal")
         .classList.add("hidden");
-}
-
-function resizeDecryptBox() {
-
-    const output =
-        document.getElementById("decryptModalOutput");
-
-    output.style.height = "auto";
-    output.style.height =
-        output.scrollHeight + "px";
 }
 
 function copyDecrypted() {
@@ -214,9 +201,8 @@ function encryptMessage() {
 
     openModal();
 
-    // IMPORTANT: wait until modal is visible
     requestAnimationFrame(() => {
-        requestAnimationFrame(resizeOutputBox);
+        autoResizeTextarea(modalOutput);
     });
 }
 
@@ -238,7 +224,17 @@ function decryptMessage() {
     document.getElementById("decryptModalOutput").value =
         decrypted;
 
+    const decryptOutput =
+    document.getElementById("decryptModalOutput");
+
+    decryptOutput.value = decrypted;    
+
     openDecryptModal();
+
+    requestAnimationFrame(() => {
+        autoResizeTextarea(decryptOutput);
+    });
+
 }
 
 function copyOutput() {

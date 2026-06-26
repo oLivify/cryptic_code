@@ -45,12 +45,11 @@ textarea {
     -webkit-text-size-adjust: 100%;
 }
 
-#modalOutput {
-    width: 100%;
+.modal-text {
     min-height: 80px;
     max-height: 250px;
-    resize: none;
     overflow-y: auto;
+    transition: height 0.2s ease;
 }
 
 input:focus,
