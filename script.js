@@ -1,8 +1,61 @@
 const HACKER_COLORS = [
-    "#00ff41", "#00ffff", "#00aaff", "#ff00ff", "#ffb300", "#ff3131", "#e8ffe8",
-    "#39ff14", "#9d00ff", "#ff5e00", "#00ffaa", "#ff0055", "#bcff00", "#1ad1d1", 
-    "#7b2cbf", "#ffff00"
-  ];
+    "#00ff41", // Hacker green
+    "#00ffff", // Cyan
+    "#00aaff", // Sky blue
+    "#ff00ff", // Magenta
+    "#ffb300", // Amber
+    "#ff3131", // Bright red
+    "#e8ffe8", // Soft white
+    "#39ff14", // Neon green
+    "#9d00ff", // Purple
+    "#ff5e00", // Orange
+    "#00ffaa", // Aqua green
+    "#ff0055", // Pink red
+    "#bcff00", // Lime
+    "#1ad1d1", // Teal
+    "#7b2cbf", // Violet
+    "#ffff00", // Yellow
+
+    // Additional colors
+    "#00ffcc", // Mint cyan
+    "#66ff66", // Light green
+    "#33ccff", // Electric blue
+    "#6699ff", // Cornflower blue
+    "#9966ff", // Lavender
+    "#cc66ff", // Bright lavender
+    "#ff66cc", // Hot pink
+    "#ff6699", // Rose pink
+    "#ff884d", // Bright coral
+    "#ffcc00", // Gold
+    "#ffee33", // Neon yellow
+    "#ccff33", // Yellow-green
+    "#66ffcc", // Seafoam
+    "#00e5ff", // Bright cyan
+    "#40c4ff", // Light azure
+    "#82b1ff", // Ice blue
+    "#b388ff", // Pastel violet
+    "#ea80fc", // Orchid
+    "#ff80ab", // Bubblegum pink
+    "#ff8a80", // Salmon
+    "#ffd180", // Peach
+    "#ffffff", // Pure white
+    "#c8f7ff", // Frost blue
+    "#d4ff6a", // Electric lime
+    "#aaffee", // Pale aqua
+    "#ffdf6b", // Soft gold
+    "#7df9ff", // Electric blue
+    "#f72585", // Neon pink
+    "#4cc9f0", // Bright cyan-blue
+    "#7209b7", // Deep neon purple
+    "#b5179e", // Neon fuchsia
+    "#80ffdb", // Mint
+    "#caffbf", // Light lime
+    "#fdffb6", // Pale yellow
+    "#ffd6a5", // Warm peach
+    "#9bf6ff", // Ice cyan
+    "#bde0fe", // Bright powder blue
+    "#ffc6ff"  // Soft pink
+];
 
 const randomColor = HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
 document.documentElement.style.setProperty("--hacker", randomColor);
