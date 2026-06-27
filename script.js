@@ -35,8 +35,6 @@ function openDecryptModal() {
     document
         .getElementById("decryptModal")
         .classList.remove("hidden");
-
-    requestAnimationFrame(resizeDecryptBox);
 }
 
 function closeDecryptModal() {
@@ -209,25 +207,17 @@ function encryptMessage() {
 
 function decryptMessage() {
 
-    const text =
-        document.getElementById("input").value;
+    const text = document.getElementById("input").value;
+    const key = document.getElementById("key").value;
 
-    const key =
-        document.getElementById("key").value;
+    const decrypted = decrypt(text, key);
 
-    const decrypted =
-        decrypt(text, key);
-
-    document.getElementById("output").value =
-        decrypted;
-
-    document.getElementById("decryptModalOutput").value =
-        decrypted;
+    document.getElementById("output").value = decrypted;
 
     const decryptOutput =
-    document.getElementById("decryptModalOutput");
+        document.getElementById("decryptModalOutput");
 
-    decryptOutput.value = decrypted;    
+    decryptOutput.value = decrypted;
 
     openDecryptModal();
 
@@ -236,6 +226,7 @@ function decryptMessage() {
     });
 
 }
+
 
 function copyOutput() {
 
