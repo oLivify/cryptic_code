@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .game-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .game-card {
+            background-color: #1a1a1a;
+            border: 2px solid var(--hacker, #00ff41);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px var(--hacker, #00ff41);
+        }
+
+        .game-card h2 {
+            margin: 0 0 5px 0;
+            font-size: 1.3rem;
+            color: var(--hacker, #00ff41);
+        }
+
+        .game-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="text-align: center;">
+    <h1>Arcade</h1>
+    <p>Select a mini-game to play:</p>
+
+    <div class="game-grid">
+        <div class="game-card" onclick="window.location.href='game.html'">
+            <h2>Whack-a-Mole</h2>
+            <p>Test your reaction speed before targets disappear!</p>
+        </div>
+
+        <div class="game-card" onclick="window.location.href='tictactoe.html'">
+            <h2>Tic-Tac-Toe</h2>
+            <p>Challenge the computer to a classic logic duel.</p>
+        </div>
+    </div>
+
+    <button onclick="window.location.href='index.html'" style="margin-top: 10px;">Back to Cipher</button>
+</div>
+
+<script>
+    // Apply random hacker color on load
+    const HACKER_COLORS = ["#00ff41", "#00ffff", "#ff00ff", "#ffb300", "#39ff14", "#ff3131"];
+    const randomColor = HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
+    document.documentElement.style.setProperty("--hacker", randomColor);
+</script>
+
+</body>
+</html>
