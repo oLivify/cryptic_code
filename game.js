@@ -19,6 +19,8 @@ function startGame() {
     scoreDisplay.textContent = score;
     gameActive = true;
     currentHoleIndex = null;
+    statusDisplay.textContent = "";
+
 
     // Clear any leftover timers and active mole graphics
     clearTimeout(moleTimer);
@@ -56,7 +58,8 @@ function gameOver() {
     holes.forEach(hole => hole.classList.remove("mole"));
     currentHoleIndex = null;
 
-    alert(`Game Over! You missed a mole.\nFinal Score: ${score}`);
+    // Render themed terminal failure status instead of alert popup
+    statusDisplay.textContent = `CRITICAL FAILURE: Target Signal Lost // Score: ${score}`;
 }
 
 // Attach click listeners to all holes
