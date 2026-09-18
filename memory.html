@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Matrix</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 90px);
+            grid-template-rows: repeat(3, 90px);
+            gap: 12px;
+            margin: 20px auto;
+            justify-content: center;
+        }
+
+        .tile {
+            width: 90px;
+            height: 90px;
+            background-color: #222;
+            border: 2px solid var(--hacker, #00ff41);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.15s ease, box-shadow 0.15s ease;
+            user-select: none;
+        }
+
+        .tile.active {
+            background-color: var(--hacker, #00ff41);
+            box-shadow: 0 0 20px var(--hacker, #00ff41);
+        }
+
+        .tile.wrong {
+            background-color: #ff3131;
+            border-color: #ff3131;
+            box-shadow: 0 0 20px #ff3131;
+        }
+
+        #status {
+            font-size: 1.1rem;
+            min-height: 1.5em;
+            margin-top: 10px;
+            color: var(--hacker, #00ff41);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="text-align: center;">
+    <h1>Memory Matrix</h1>
+    <p>Level: <span id="level">1</span></p>
+    <div id="status">Press "Start Game" to begin</div>
+
+    <div class="grid">
+        <div class="tile" data-index="0"></div>
+        <div class="tile" data-index="1"></div>
+        <div class="tile" data-index="2"></div>
+        <div class="tile" data-index="3"></div>
+        <div class="tile" data-index="4"></div>
+        <div class="tile" data-index="5"></div>
+        <div class="tile" data-index="6"></div>
+        <div class="tile" data-index="7"></div>
+        <div class="tile" data-index="8"></div>
+    </div>
+
+    <button onclick="startGame()" style="margin-top: 15px;">Start Game</button>
+    <button onclick="window.location.href='arcade.html'" style="margin-top: 15px;">Back to Arcade</button>
+</div>
+
+<script src="memory.js"></script>
+
+</body>
+</html>
