@@ -89,15 +89,21 @@ function shareToMemoryGame() {
     const encryptedText = document.getElementById("modalOutput").value;
     if (!encryptedText) return;
 
-    // Build absolute URL dynamically using current window location base
-    const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
-    const fullGameUrl = `${baseUrl}/memory.html?msg=${encodeURIComponent(encryptedText)}`;
+    // Get current directory path, removing any filename (like index.html)
+    let path = window.location.pathname;
+    if (path.endsWith('.html')) {
+        path = path.substring(0, path.lastIndexOf('/') + 1);
+    } else if (!path.endsWith('/')) {
+        path += '/';
+    }
+
+    // Combine origin, path, and page target
+    const fullGameUrl = `${window.location.origin}${path}memory.html?msg=${encodeURIComponent(encryptedText)}`;
 
     // Copy to clipboard
     navigator.clipboard.writeText(fullGameUrl).then(() => {
         alert("Game challenge link copied to clipboard!");
     }).catch(() => {
-        // Fallback for browsers with restricted clipboard access
         prompt("Copy this link to send to your friend:", fullGameUrl);
     });
 }
