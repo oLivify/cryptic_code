@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 90px);
+            grid-template-rows: repeat(3, 90px);
+            gap: 10px;
+            margin: 20px auto;
+            justify-content: center;
+        }
+
+        .cell {
+            width: 90px;
+            height: 90px;
+            background-color: #222;
+            border: 2px solid var(--hacker, #00ff41);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--hacker, #00ff41);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .cell.disabled {
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="text-align: center;">
+    <h1>Tic-Tac-Toe</h1>
+    <p id="status">Your Turn (X)</p>
+
+    <div class="board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+    </div>
+
+    <button onclick="resetGame()" style="margin-top: 15px;">Restart Game</button>
+    <button onclick="window.location.href='index.html'" style="margin-top: 15px;">Back to Cipher</button>
+</div>
+
+<script src="tictactoe.js"></script>
+
+</body>
+</html>
