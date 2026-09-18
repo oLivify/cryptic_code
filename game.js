@@ -5,8 +5,8 @@ document.documentElement.style.setProperty("--hacker", randomColor);
 
 let score = 0;
 let currentHoleIndex = null;
-let gameInterval = null;
-let activeMoleClicked = true; // Tracks if the current mole was hit
+let moleTimer = null;
+let moleDuration = 1000; // Time in milliseconds player has to click (1 second)
 
 const holes = document.querySelectorAll(".hole");
 const scoreDisplay = document.getElementById("score");
@@ -14,40 +14,22 @@ const scoreDisplay = document.getElementById("score");
 function startGame() {
     score = 0;
     scoreDisplay.textContent = score;
-    currentHoleIndex = null;
-    activeMoleClicked = true;
-
-    if (gameInterval) clearInterval(gameInterval);
-
-    // Pick a new mole position every 900ms
-    gameInterval = setInterval(showMole, 900);
+    clearTimeout(moleTimer);
+    nextTurn();
 }
 
 function gameOver() {
-    clearInterval(gameInterval);
-    gameInterval = null;
-    
-    // Clear all moles
+    clearTimeout(moleTimer);
     holes.forEach(hole => hole.classList.remove("mole"));
     currentHoleIndex = null;
-
     alert(`Game Over! You missed a mole. Final Score: ${score}`);
 }
 
-function showMole() {
-    // If a mole was visible and wasn't clicked in time -> Lose
-    if (currentHoleIndex !== null && !activeMoleClicked) {
-        gameOver();
-        return;
-    }
-
-    // Reset hit tracker for the new turn
-    activeMoleClicked = false;
-
-    // Clear previous mole graphics
+function nextTurn() {
+    // Clear previous active mole
     holes.forEach(hole => hole.classList.remove("mole"));
 
-    // Pick a new random hole (different from the last one)
+    // Pick a new random hole (different from previous if possible)
     let newIndex;
     do {
         newIndex = Math.floor(Math.random() * holes.length);
@@ -55,16 +37,26 @@ function showMole() {
 
     currentHoleIndex = newIndex;
     holes[currentHoleIndex].classList.add("mole");
+
+    // If timer ends before player clicks -> Game Over
+    moleTimer = setTimeout(() => {
+        gameOver();
+    }, moleDuration);
 }
 
-// Add click listener to each hole
+// Add click event to holes
 holes.forEach((hole, index) => {
     hole.addEventListener("click", () => {
-        if (index === currentHoleIndex && !activeMoleClicked) {
-            activeMoleClicked = true; // Player hit it in time
+        // Only trigger if clicked hole currently has the mole
+        if (index === currentHoleIndex) {
+            clearTimeout(moleTimer); // Stop the game over timeout
             score++;
             scoreDisplay.textContent = score;
             hole.classList.remove("mole");
+            currentHoleIndex = null;
+
+            // Wait brief pause (200ms) then spawn next mole
+            setTimeout(nextTurn, 200);
         }
     });
 });
