@@ -13,7 +13,7 @@
     <h1>Secret Messages</h1>
 
     <div class="input-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px;">
-        <span style="font-size: 1.5rem;">🔑</span>
+            <span style="font-size: 1.5rem;">🔑</span>
 
         <div style="display: flex; width: 100%; gap: 8px;">
             <input
@@ -32,14 +32,6 @@
             >
                 Show
             </button>
-
-            <!-- <button
-                onclick="generateRandomKey()"
-                style="flex: 0 0 auto; padding: 0 14px;"
-                title="Generate Random Key"
-            >
-                🔁
-            </button> -->
         </div>
     </div>
 
@@ -55,15 +47,12 @@
     <div class="buttons" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
         <button onclick="encryptMessage()">Encrypt</button>
         <button onclick="decryptMessage()">Decrypt</button>
-        <!-- <button onclick="copyOutput()">Copy</button>
-        <button onclick="pasteMessage()">Paste</button> -->
         <button onclick="clearAll()">Clear</button>
-        
-        
     </div>
+
     <div class="input-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px;">
-        <!-- Lock emoji wrapped in a link with a hover effect -->
-        <a href="game.html" title="" style="text-decoration: none; cursor: pointer;">
+        <!-- Lock emoji links to Arcade Menu -->
+        <a href="arcade.html" title="Open Arcade" style="text-decoration: none; cursor: pointer;">
             <span style="font-size: 1.5rem;">🔒</span>
         </a>
         <textarea
@@ -73,11 +62,6 @@
             style="margin: 0; width: 100%; box-sizing: border-box;"
         ></textarea>
     </div>
-
-<!-- <h2>Operation History</h2>
-
-<div id="history"></div> -->
-
 
 <!-- ========================= -->
 <!-- Encryption Modal -->
