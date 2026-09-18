@@ -1,47 +1,83 @@
-// Apply random accent color on load
+// Apply random hacker color theme
 const HACKER_COLORS = ["#00ff41", "#00ffff", "#ff00ff", "#ffb300", "#39ff14", "#ff3131"];
 const randomColor = HACKER_COLORS[Math.floor(Math.random() * HACKER_COLORS.length)];
 document.documentElement.style.setProperty("--hacker", randomColor);
 
 let score = 0;
 let currentHoleIndex = null;
-let gameInterval = null;
+let moleTimer = null;
+let gameActive = false;
+const moleDuration = 1000; // 1 second to hit each mole
 
 const holes = document.querySelectorAll(".hole");
 const scoreDisplay = document.getElementById("score");
+const statusDisplay = document.getElementById("game-status");
 
 function startGame() {
+    // Reset state
     score = 0;
     scoreDisplay.textContent = score;
+    statusDisplay.textContent = "Game in progress...";
+    gameActive = true;
+    currentHoleIndex = null;
 
-    if (gameInterval) clearInterval(gameInterval);
-
-    // Pick a new mole position every 800ms
-    gameInterval = setInterval(showMole, 800);
-}
-
-function showMole() {
-    // Clear previous mole
+    // Clear any leftover timers and active mole graphics
+    clearTimeout(moleTimer);
     holes.forEach(hole => hole.classList.remove("mole"));
 
-    // Pick a new random hole (different from the last one)
+    // Start the loop
+    spawnMole();
+}
+
+function spawnMole() {
+    if (!gameActive) return;
+
+    // Clear previous active mole graphic
+    holes.forEach(hole => hole.classList.remove("mole"));
+
+    // Select a random new hole
     let newIndex;
     do {
         newIndex = Math.floor(Math.random() * holes.length);
-    } while (newIndex === currentHoleIndex);
+    } while (newIndex === currentHoleIndex && holes.length > 1);
 
     currentHoleIndex = newIndex;
     holes[currentHoleIndex].classList.add("mole");
+
+    // Start countdown for current mole. If it runs out -> Game Over
+    clearTimeout(moleTimer);
+    moleTimer = setTimeout(() => {
+        gameOver();
+    }, moleDuration);
 }
 
-// Add click listener to each hole
+function gameOver() {
+    gameActive = false;
+    clearTimeout(moleTimer);
+    holes.forEach(hole => hole.classList.remove("mole"));
+    currentHoleIndex = null;
+
+    // Render Game Over text inside the container instead of an alert popup
+    statusDisplay.textContent = `SYSTEM FAILURE: Missed Target! Final Score: ${score}`;
+}
+
+// Attach click listeners to all holes
 holes.forEach((hole, index) => {
     hole.addEventListener("click", () => {
-        if (index === currentHoleIndex) {
+        // Only react if game is running and player clicked the active mole
+        if (gameActive && index === currentHoleIndex) {
+            clearTimeout(moleTimer); // Cancel failure timer
             score++;
             scoreDisplay.textContent = score;
+
+            // Remove mole immediately so player knows they hit it
             hole.classList.remove("mole");
-            currentHoleIndex = null; // Prevent multi-clicking the same mole
+            currentHoleIndex = null;
+
+            // Pause briefly (150ms) before spawning the next mole
+            setTimeout(() => {
+                if (gameActive) spawnMole();
+            }, 150);
         }
     });
 });
