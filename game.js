@@ -17,7 +17,6 @@ function startGame() {
     // Reset state
     score = 0;
     scoreDisplay.textContent = score;
-    statusDisplay.textContent = "Game in progress...";
     gameActive = true;
     currentHoleIndex = null;
 
@@ -57,8 +56,7 @@ function gameOver() {
     holes.forEach(hole => hole.classList.remove("mole"));
     currentHoleIndex = null;
 
-    // Render Game Over text inside the container instead of an alert popup
-    statusDisplay.textContent = `SYSTEM FAILURE: Missed Target! Final Score: ${score}`;
+    alert(`Game Over! You missed a mole.\nFinal Score: ${score}`);
 }
 
 // Attach click listeners to all holes
