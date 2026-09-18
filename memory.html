@@ -67,15 +67,9 @@
 
     <!-- Inside memory.html container -->
     <div id="decrypt-section" style="display: none; margin-top: 20px;">
-        <h2 style="color: var(--hacker, #00ff41);">🔐 Security Access Granted!</h2>
-        <p>Enter secret key to reveal the locked message:</p>
-        
-        <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 10px;">
-            <input type="password" id="game-key" placeholder="Enter Secret Key" style="font-size: 16px; padding: 8px;">
-            <button onclick="decryptGameMessage()">Decrypt</button>
-        </div>
-        
-        <textarea id="decrypted-result" readonly style="width: 100%; min-height: 80px;"></textarea>
+        <h2 style="color: var(--hacker, #00ff41);">🔐 SECURITY CLEARANCE GRANTED</h2>
+        <p>Decrypted Cipher Payload:</p>
+        <textarea id="decrypted-result" readonly style="width: 100%; min-height: 80px; background: #000; color: var(--hacker, #00ff41); border: 1px solid var(--hacker, #00ff41); padding: 10px; font-family: monospace;"></textarea>
     </div>
 
     <button onclick="startGame()" style="margin-top: 15px;">Start Game</button>

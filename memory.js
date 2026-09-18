@@ -59,11 +59,11 @@ function flashTile(index) {
     }, 350);
 }
 
-// Check if an encrypted message exists in the URL parameters
+// Parse both parameters from URL
 const urlParams = new URLSearchParams(window.location.search);
 const lockedMessage = urlParams.get("msg");
+const lockedKey = urlParams.get("key");
 
-// Update handleTileClick inside memory.js
 function handleTileClick(e) {
     if (!gameActive || isPlayingSequence) return;
 
@@ -81,10 +81,13 @@ function handleTileClick(e) {
     }
 
     if (playerSequence.length === sequence.length) {
-        // Check if player cleared Round 3 (level increases to 4)
-        if (level === 3 && lockedMessage) {
+        // Trigger automatic decryption upon clearing Round 3
+        if (level === 3 && lockedMessage && lockedKey) {
             gameActive = false;
             statusDisplay.textContent = "LEVEL 3 CLEARED // DATA UNLOCKED";
+            
+            // Execute decryption and reveal output
+            autoDecrypt(lockedMessage, lockedKey);
             document.getElementById("decrypt-section").style.display = "block";
             return;
         }
@@ -95,6 +98,26 @@ function handleTileClick(e) {
         isPlayingSequence = true;
         setTimeout(nextRound, 1000);
     }
+}
+
+function autoDecrypt(cipherText, key) {
+    let result = "";
+    let keyIndex = 0;
+
+    for (let i = 0; i < cipherText.length; i++) {
+        let charCode = cipherText.charCodeAt(i);
+
+        if (charCode >= 32 && charCode <= 126) {
+            let shift = key.charCodeAt(keyIndex % key.length);
+            let decryptedCode = ((charCode - 32 - shift + 9500) % 95) + 32;
+            result += String.fromCharCode(decryptedCode);
+            keyIndex++;
+        } else {
+            result += cipherText[i];
+        }
+    }
+
+    document.getElementById("decrypted-result").value = result;
 }
 
 // Vigenère Cipher Decryption function for memory.js

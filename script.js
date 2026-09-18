@@ -87,9 +87,13 @@ async function shareMessage() {
 
 function shareToMemoryGame() {
     const encryptedText = document.getElementById("modalOutput").value;
-    if (!encryptedText) return;
+    const key = document.getElementById("key").value; // Grab the secret key
 
-    // Get current directory path, removing any filename (like index.html)
+    if (!encryptedText || !key) {
+        alert("Please enter a secret key and encrypt a message first!");
+        return;
+    }
+
     let path = window.location.pathname;
     if (path.endsWith('.html')) {
         path = path.substring(0, path.lastIndexOf('/') + 1);
@@ -97,14 +101,14 @@ function shareToMemoryGame() {
         path += '/';
     }
 
-    // Combine origin, path, and page target
-    const fullGameUrl = `${window.location.origin}${path}memory.html?msg=${encodeURIComponent(encryptedText)}`;
+    // Attach both message and key as URL parameters
+    const params = `msg=${encodeURIComponent(encryptedText)}&key=${encodeURIComponent(key)}`;
+    const fullGameUrl = `${window.location.origin}${path}memory.html?${params}`;
 
-    // Copy to clipboard
     navigator.clipboard.writeText(fullGameUrl).then(() => {
-        alert("Game challenge link copied to clipboard!");
+        alert("Challenge link copied! Recipient must clear Round 3 to auto-decrypt.");
     }).catch(() => {
-        prompt("Copy this link to send to your friend:", fullGameUrl);
+        prompt("Copy this link:", fullGameUrl);
     });
 }
 
