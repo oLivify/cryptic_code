@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Mole</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 15px;
+            margin: 20px auto;
+            justify-content: center;
+        }
+
+        .hole {
+            width: 100px;
+            height: 100px;
+            background-color: #222;
+            border: 2px solid var(--hacker, #00ff41);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+
+        .mole {
+            background-color: var(--hacker, #00ff41);
+            box-shadow: 0 0 15px var(--hacker, #00ff41);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="text-align: center;">
+    <h1>Whack-a-Mole</h1>
+    <p>Score: <span id="score">0</span></p>
+
+    <div class="grid">
+        <div class="hole" id="hole-0"></div>
+        <div class="hole" id="hole-1"></div>
+        <div class="hole" id="hole-2"></div>
+        <div class="hole" id="hole-3"></div>
+        <div class="hole" id="hole-4"></div>
+        <div class="hole" id="hole-5"></div>
+        <div class="hole" id="hole-6"></div>
+        <div class="hole" id="hole-7"></div>
+        <div class="hole" id="hole-8"></div>
+    </div>
+
+    <button onclick="startGame()" style="margin-top: 15px;">Start Game</button>
+    <button onclick="window.location.href='index.html'" style="margin-top: 15px;">Back to Cipher</button>
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>
