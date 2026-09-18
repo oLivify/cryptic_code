@@ -206,6 +206,7 @@ function copyOutput() {
     navigator.clipboard.writeText(output.value);
 }
 
+// Clears message inputs/outputs only while leaving the secret key alone
 function clearAll() {
     document.getElementById("input").value = "";
     document.getElementById("output").value = "";
