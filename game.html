@@ -23,11 +23,20 @@
             cursor: pointer;
             position: relative;
             user-select: none;
+            transition: background-color 0.1s ease;
         }
 
         .mole {
             background-color: var(--hacker, #00ff41);
             box-shadow: 0 0 15px var(--hacker, #00ff41);
+        }
+
+        #game-status {
+            font-size: 1.1rem;
+            min-height: 1.5em;
+            margin-top: 10px;
+            color: var(--hacker, #00ff41);
+            font-weight: bold;
         }
     </style>
 </head>
@@ -36,6 +45,7 @@
 <div class="container" style="text-align: center;">
     <h1>Whack-a-Mole</h1>
     <p>Score: <span id="score">0</span></p>
+    <div id="game-status">Press "Start Game" to play</div>
 
     <div class="grid">
         <div class="hole" id="hole-0"></div>

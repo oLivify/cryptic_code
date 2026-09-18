@@ -11,6 +11,7 @@ const moleDuration = 1000; // 1 second to hit each mole
 
 const holes = document.querySelectorAll(".hole");
 const scoreDisplay = document.getElementById("score");
+const statusDisplay = document.getElementById("game-status");
 
 function startGame() {
     // Reset state
