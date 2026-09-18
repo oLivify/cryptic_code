@@ -87,7 +87,7 @@ async function shareMessage() {
 
 function shareToMemoryGame() {
     const encryptedText = document.getElementById("modalOutput").value;
-    const key = document.getElementById("key").value; // Grab the secret key
+    const key = document.getElementById("key").value;
 
     if (!encryptedText || !key) {
         alert("Please enter a secret key and encrypt a message first!");
@@ -101,8 +101,10 @@ function shareToMemoryGame() {
         path += '/';
     }
 
-    // Attach both message and key as URL parameters
-    const params = `msg=${encodeURIComponent(encryptedText)}&key=${encodeURIComponent(key)}`;
+    // Obfuscate the secret key using Base64 encoding
+    const encodedKey = btoa(key);
+
+    const params = `msg=${encodeURIComponent(encryptedText)}&key=${encodeURIComponent(encodedKey)}`;
     const fullGameUrl = `${window.location.origin}${path}memory.html?${params}`;
 
     navigator.clipboard.writeText(fullGameUrl).then(() => {

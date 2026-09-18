@@ -59,10 +59,10 @@ function flashTile(index) {
     }, 350);
 }
 
-// Parse both parameters from URL
+// Extract parameters from URL
 const urlParams = new URLSearchParams(window.location.search);
 const lockedMessage = urlParams.get("msg");
-const lockedKey = urlParams.get("key");
+const encodedKey = urlParams.get("key");
 
 function handleTileClick(e) {
     if (!gameActive || isPlayingSequence) return;
@@ -81,14 +81,21 @@ function handleTileClick(e) {
     }
 
     if (playerSequence.length === sequence.length) {
-        // Trigger automatic decryption upon clearing Round 3
-        if (level === 3 && lockedMessage && lockedKey) {
+        // Trigger on clearing Round 3 (level reaches 3)
+        if (level === 3 && lockedMessage && encodedKey) {
             gameActive = false;
             statusDisplay.textContent = "LEVEL 3 CLEARED // DATA UNLOCKED";
-            
-            // Execute decryption and reveal output
-            autoDecrypt(lockedMessage, lockedKey);
-            document.getElementById("decrypt-section").style.display = "block";
+
+            try {
+                // Decode key back from Base64
+                const decodedKey = atob(encodedKey);
+                autoDecrypt(lockedMessage, decodedKey);
+                
+                // Unhide the decrypted box
+                document.getElementById("decrypt-section").style.display = "block";
+            } catch (err) {
+                statusDisplay.textContent = "ERROR: CORRUPTED ACCESS KEY";
+            }
             return;
         }
 
@@ -117,6 +124,7 @@ function autoDecrypt(cipherText, key) {
         }
     }
 
+    // Insert decrypted text into the page textarea
     document.getElementById("decrypted-result").value = result;
 }
 
