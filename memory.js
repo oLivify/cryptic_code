@@ -59,6 +59,11 @@ function flashTile(index) {
     }, 350);
 }
 
+// Check if an encrypted message exists in the URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const lockedMessage = urlParams.get("msg");
+
+// Update handleTileClick inside memory.js
 function handleTileClick(e) {
     if (!gameActive || isPlayingSequence) return;
 
@@ -68,23 +73,52 @@ function handleTileClick(e) {
 
     const currentStep = playerSequence.length - 1;
 
-    // Check if step matches sequence
     if (playerSequence[currentStep] !== sequence[currentStep]) {
-        // Wrong tile clicked
         e.target.classList.add("wrong");
         setTimeout(() => e.target.classList.remove("wrong"), 400);
         gameOver();
         return;
     }
 
-    // Check if player finished full sequence for this level
     if (playerSequence.length === sequence.length) {
+        // Check if player cleared Round 3 (level increases to 4)
+        if (level === 3 && lockedMessage) {
+            gameActive = false;
+            statusDisplay.textContent = "LEVEL 3 CLEARED // DATA UNLOCKED";
+            document.getElementById("decrypt-section").style.display = "block";
+            return;
+        }
+
         level++;
         levelDisplay.textContent = level;
         statusDisplay.textContent = "Access Granted! Next Level...";
         isPlayingSequence = true;
         setTimeout(nextRound, 1000);
     }
+}
+
+// Vigenère Cipher Decryption function for memory.js
+function decryptGameMessage() {
+    const key = document.getElementById("game-key").value;
+    if (!key || !lockedMessage) return;
+
+    let result = "";
+    let keyIndex = 0;
+
+    for (let i = 0; i < lockedMessage.length; i++) {
+        let charCode = lockedMessage.charCodeAt(i);
+
+        if (charCode >= 32 && charCode <= 126) {
+            let shift = key.charCodeAt(keyIndex % key.length);
+            let decryptedCode = ((charCode - 32 - shift + 9500) % 95) + 32;
+            result += String.fromCharCode(decryptedCode);
+            keyIndex++;
+        } else {
+            result += lockedMessage[i];
+        }
+    }
+
+    document.getElementById("decrypted-result").value = result;
 }
 
 function gameOver() {

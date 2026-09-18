@@ -65,6 +65,19 @@
         <div class="tile" data-index="8"></div>
     </div>
 
+    <!-- Inside memory.html container -->
+    <div id="decrypt-section" style="display: none; margin-top: 20px;">
+        <h2 style="color: var(--hacker, #00ff41);">🔐 Security Access Granted!</h2>
+        <p>Enter secret key to reveal the locked message:</p>
+        
+        <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 10px;">
+            <input type="password" id="game-key" placeholder="Enter Secret Key" style="font-size: 16px; padding: 8px;">
+            <button onclick="decryptGameMessage()">Decrypt</button>
+        </div>
+        
+        <textarea id="decrypted-result" readonly style="width: 100%; min-height: 80px;"></textarea>
+    </div>
+
     <button onclick="startGame()" style="margin-top: 15px;">Start Game</button>
     <button onclick="window.location.href='arcade.html'" style="margin-top: 15px;">Back to Arcade</button>
 </div>

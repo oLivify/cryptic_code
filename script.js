@@ -85,6 +85,18 @@ async function shareMessage() {
     }
 }
 
+function shareToMemoryGame() {
+    const encryptedText = document.getElementById("modalOutput").value;
+    if (!encryptedText) return;
+
+    // Encodes the message so it can safely sit in the URL
+    const gameUrl = `memory.html?msg=${encodeURIComponent(encryptedText)}`;
+    
+    // Copy the shareable link to the user's clipboard
+    navigator.clipboard.writeText(window.location.origin + "/" + gameUrl);
+    alert("Game challenge link copied to clipboard! Send it to a friend.");
+}
+
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 function generateTable() {
