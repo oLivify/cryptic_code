@@ -12,44 +12,45 @@
 
     <h1>Secret Messages</h1>
 
-    <div class="input-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 20px; width: 100%;">
-        <!-- Key emoji links to Arcade Menu -->
-        <a href="arcade.html" title="Open Arcade" style="text-decoration: none; cursor: pointer;">
-            <span style="font-size: 1.5rem;">🔑</span>
-        </a>
+<div class="input-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 20px; width: 100%;">
+    <a href="arcade.html" title="Open Arcade" style="text-decoration: none; cursor: pointer;">
+        <span style="font-size: 1.5rem;">🔑</span>
+    </a>
 
-        <div style="display: flex; width: 100%; gap: 8px; align-items: center;">
-            <input
-                type="password"
-                id="key"
-                placeholder="Enter Secret Key"
-                style="margin: 0; flex: 1; min-height: 44px; font-size: 16px; box-sizing: border-box;"
-            >
+    <div style="display: flex; width: 100%; gap: 6px; align-items: center;">
+        <input
+            type="password"
+            id="key"
+            placeholder="Enter Secret Key"
+            style="margin: 0; flex: 1; width: 100%; min-height: 44px; font-size: 16px; box-sizing: border-box;"
+        >
 
-            <button
-                type="button"
-                id="toggleKeyBtn"
-                onclick="toggleKeyVisibility()"
-                style="
-                    flex: 0 0 auto;
-                    min-height: 44px;
-                    padding: 0 16px;
-                    font-size: 14px;
-                    cursor: pointer;
-                    user-select: none;
-                    -webkit-user-select: none;
-                    touch-action: manipulation;
-                    -webkit-tap-highlight-color: transparent;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                "
-                title="Toggle Key Visibility"
-            >
-                Show
-            </button>
-        </div>
+        <button
+            type="button"
+            id="toggleKeyBtn"
+            onclick="toggleKeyVisibility()"
+            style="
+                flex: 0 0 auto;
+                width: auto;
+                min-height: 44px;
+                padding: 0 10px;
+                font-size: 13px;
+                white-space: nowrap;
+                cursor: pointer;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            "
+            title="Toggle Key Visibility"
+        >
+            Show
+        </button>
     </div>
+</div>
 
     <div class="input-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 20px;">
         <span style="font-size: 1.5rem;">💬</span>
