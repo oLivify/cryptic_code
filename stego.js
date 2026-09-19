@@ -67,15 +67,30 @@ function encodeMessage() {
 
             ctx.putImageData(imgData, 0, 0);
 
-            // Output generated image
-            const resultUrl = canvas.toDataURL('image/png');
-            const preview = document.getElementById('encode-preview');
-            const downloadBtn = document.getElementById('download-btn');
+            // Convert canvas to Blob for reliable mobile/desktop downloads
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    alert("Error generating image file!");
+                    return;
+                }
 
-            preview.src = resultUrl;
-            preview.style.display = 'inline-block';
-            downloadBtn.href = resultUrl;
-            downloadBtn.style.display = 'inline-block';
+                // Create a temporary object URL
+                const blobUrl = URL.createObjectURL(blob);
+                const preview = document.getElementById('encode-preview');
+                const downloadBtn = document.getElementById('download-btn');
+
+                preview.src = blobUrl;
+                preview.style.display = 'inline-block';
+                
+                downloadBtn.href = blobUrl;
+                downloadBtn.download = "stego_image.png";
+                downloadBtn.style.display = 'inline-block';
+
+                // Programmatically click to trigger download on tap/click
+                downloadBtn.onclick = function() {
+                    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+                };
+            }, 'image/png');
         };
         img.src = e.target.result;
     };
