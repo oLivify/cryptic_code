@@ -17,6 +17,9 @@ function switchTab(tab) {
 }
 
 // LSB Steganography Engine
+// Global variable to store current generated image file
+let currentBlobFile = null;
+
 function encodeMessage() {
     const fileInput = document.getElementById('encode-file');
     const secretText = document.getElementById('encode-text').value;
@@ -39,10 +42,8 @@ function encodeMessage() {
             const imgData = ctx.getImageData(0, 0, img.width, img.height);
             const data = imgData.data;
 
-            // Append delimiter to signify end of message
             const fullMessage = secretText + "###END###";
             
-            // Convert message to binary
             let binaryMsg = "";
             for (let i = 0; i < fullMessage.length; i++) {
                 let bin = fullMessage.charCodeAt(i).toString(2).padStart(8, '0');
@@ -54,47 +55,62 @@ function encodeMessage() {
                 return;
             }
 
-            // Write binary into Least Significant Bits (RGB channels)
             let msgIdx = 0;
             for (let i = 0; i < data.length && msgIdx < binaryMsg.length; i++) {
-                if ((i + 1) % 4 === 0) continue; // Skip Alpha channel
+                if ((i + 1) % 4 === 0) continue;
 
                 let currentBit = parseInt(binaryMsg[msgIdx]);
-                // Set LSB
                 data[i] = (data[i] & 0xFE) | currentBit;
                 msgIdx++;
             }
 
             ctx.putImageData(imgData, 0, 0);
 
-            // Convert canvas to Blob for reliable mobile/desktop downloads
             canvas.toBlob((blob) => {
                 if (!blob) {
                     alert("Error generating image file!");
                     return;
                 }
 
-                // Create a temporary object URL
+                // Store file reference for Web Share API
+                currentBlobFile = new File([blob], "stego_image.png", { type: "image/png" });
+
                 const blobUrl = URL.createObjectURL(blob);
                 const preview = document.getElementById('encode-preview');
                 const downloadBtn = document.getElementById('download-btn');
+                const shareBtn = document.getElementById('share-btn');
+                const saveInstructions = document.getElementById('save-instructions');
 
                 preview.src = blobUrl;
                 preview.style.display = 'inline-block';
-                
+                saveInstructions.style.display = 'block';
+
                 downloadBtn.href = blobUrl;
-                downloadBtn.download = "stego_image.png";
                 downloadBtn.style.display = 'inline-block';
 
-                // Programmatically click to trigger download on tap/click
-                downloadBtn.onclick = function() {
-                    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-                };
+                // Show native Web Share button if browser supports file sharing (iOS Safari/Android Chrome)
+                if (navigator.canShare && navigator.canShare({ files: [currentBlobFile] })) {
+                    shareBtn.style.display = 'inline-block';
+                }
             }, 'image/png');
         };
         img.src = e.target.result;
     };
     reader.readAsDataURL(fileInput.files[0]);
+}
+
+// Native mobile share popup
+async function shareImage() {
+    if (!currentBlobFile) return;
+    try {
+        await navigator.share({
+            files: [currentBlobFile],
+            title: 'Steganography Image',
+            text: 'Here is the encoded image payload.'
+        });
+    } catch (err) {
+        console.log("Share cancelled or not supported", err);
+    }
 }
 
 function decodeMessage() {
