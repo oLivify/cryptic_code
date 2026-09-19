@@ -115,11 +115,14 @@ async function shareImage() {
 
 function decodeMessage() {
     const fileInput = document.getElementById('decode-file');
+    const decodeText = document.getElementById('decode-text');
 
     if (!fileInput.files[0]) {
         alert("Please select an image to decode!");
         return;
     }
+
+    decodeText.value = "Extracting secret payload... Please wait.";
 
     const reader = new FileReader();
     reader.onload = function(e) {
@@ -133,30 +136,46 @@ function decodeMessage() {
             ctx.drawImage(img, 0, 0);
             const data = ctx.getImageData(0, 0, img.width, img.height).data;
 
+            // Cap scanning to max ~50,000 characters to prevent freezes on giant photos
+            const MAX_BITS_TO_SCAN = 400000; 
+            const totalBitsToScan = Math.min(data.length, MAX_BITS_TO_SCAN);
+
             let binaryMsg = "";
             let extractedText = "";
+            let i = 0;
 
-            for (let i = 0; i < data.length; i++) {
-                if ((i + 1) % 4 === 0) continue; // Skip Alpha channel
+            // Process in chunks to prevent UI freeze
+            function processChunk() {
+                const CHUNK_SIZE = 30000; // Bits per async frame
+                const end = Math.min(i + CHUNK_SIZE, totalBitsToScan);
 
-                binaryMsg += (data[i] & 1).toString();
+                for (; i < end; i++) {
+                    if ((i + 1) % 4 === 0) continue; // Skip Alpha channel
 
-                if (binaryMsg.length === 8) {
-                    let charCode = parseInt(binaryMsg, 2);
-                    let char = String.fromCharCode(charCode);
-                    extractedText += char;
-                    binaryMsg = "";
+                    binaryMsg += (data[i] & 1).toString();
 
-                    // Stop when reaching the end delimiter
-                    if (extractedText.endsWith("###END###")) {
-                        extractedText = extractedText.replace("###END###", "");
-                        document.getElementById('decode-text').value = extractedText;
-                        return;
+                    if (binaryMsg.length === 8) {
+                        let charCode = parseInt(binaryMsg, 2);
+                        extractedText += String.fromCharCode(charCode);
+                        binaryMsg = "";
+
+                        // Check if end delimiter was reached
+                        if (extractedText.endsWith("###END###")) {
+                            decodeText.value = extractedText.replace("###END###", "");
+                            return; // Stop immediately
+                        }
                     }
+                }
+
+                if (i < totalBitsToScan) {
+                    // Yield control back to browser to keep animation/UI smooth
+                    setTimeout(processChunk, 0);
+                } else {
+                    decodeText.value = "No hidden message detected (or image was compressed/modified).";
                 }
             }
 
-            document.getElementById('decode-text').value = "No hidden message found or image unreadable.";
+            processChunk();
         };
         img.src = e.target.result;
     };
