@@ -84,7 +84,6 @@
             padding: 10px 20px;
             font-weight: bold;
             border-radius: 4px;
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -101,18 +100,28 @@
     </div>
 
     <!-- ENCODE PANEL -->
-    <div style="margin-top: 15px;">
-    <img id="encode-preview" class="preview-img" alt="Encoded Result Preview">
-    <p id="save-instructions" style="display: none; font-size: 13px; color: #888; margin-top: 5px;">
-        📱 <b>Mobile Users:</b> Press & hold the image above to select <b>"Save to Photos"</b> or tap below:
-    </p>
-    <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
-        <button id="share-btn" onclick="shareImage()" style="display: none; background: #00ffff; color: #000; font-weight: bold;">
-            Share / Save Image
-        </button>
-        <a id="download-btn" download="stego_image.png">Download PNG</a>
+    <div id="encode-panel" class="panel active">
+        <h3>1. Select Base Image (PNG)</h3>
+        <input type="file" id="encode-file" accept="image/png, image/jpeg">
+        
+        <h3>2. Secret Payload</h3>
+        <textarea id="encode-text" placeholder="Enter secret message to hide..."></textarea>
+        
+        <button onclick="encodeMessage()">Embed Message & Generate PNG</button>
+        
+        <div style="margin-top: 15px;">
+            <img id="encode-preview" class="preview-img" alt="Encoded Result Preview">
+            <p id="save-instructions" style="display: none; font-size: 13px; color: #888; margin-top: 5px;">
+                📱 <b>Mobile Users:</b> Press & hold the image above to select <b>"Save to Photos"</b> or tap below:
+            </p>
+            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+                <button id="share-btn" onclick="shareImage()" style="display: none; background: #00ffff; color: #000; font-weight: bold;">
+                    Share / Save Image
+                </button>
+                <a id="download-btn" download="stego_image.png">Download PNG</a>
+            </div>
+        </div>
     </div>
-</div>
 
     <!-- DECODE PANEL -->
     <div id="decode-panel" class="panel">
