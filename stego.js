@@ -67,33 +67,36 @@ function encodeMessage() {
             ctx.putImageData(imgData, 0, 0);
 
             canvas.toBlob((blob) => {
-                if (!blob) {
-                    alert("Error generating image file!");
-                    return;
-                }
+    if (!blob) {
+        alert("Error generating image file!");
+        return;
+    }
 
-                // Store file reference for Web Share API
-                currentBlobFile = new File([blob], "stego_image.png", { type: "image/png" });
+    // Generate a random 4-digit number (1000 - 9999)
+    const randomPin = Math.floor(1000 + Math.random() * 9000);
+    const fileName = `stego_image_${randomPin}.png`;
 
-                const blobUrl = URL.createObjectURL(blob);
-                const preview = document.getElementById('encode-preview');
-                const downloadBtn = document.getElementById('download-btn');
-                const shareBtn = document.getElementById('share-btn');
-                const saveInstructions = document.getElementById('save-instructions');
+    // Store file reference with the unique filename for Web Share API
+    currentBlobFile = new File([blob], fileName, { type: "image/png" });
 
-                preview.src = blobUrl;
-                preview.style.display = 'inline-block';
-                saveInstructions.style.display = 'block';
+    const blobUrl = URL.createObjectURL(blob);
+    const preview = document.getElementById('encode-preview');
+    const downloadBtn = document.getElementById('download-btn');
+    const shareBtn = document.getElementById('share-btn');
+    const saveInstructions = document.getElementById('save-instructions');
 
-                downloadBtn.href = blobUrl;
-                downloadBtn.style.display = 'inline-block';
+    preview.src = blobUrl;
+    preview.style.display = 'inline-block';
+    saveInstructions.style.display = 'block';
 
-                // Show native Web Share button if browser supports file sharing (iOS Safari/Android Chrome)
-                if (navigator.canShare && navigator.canShare({ files: [currentBlobFile] })) {
-                    shareBtn.style.display = 'inline-block';
-                }
-            }, 'image/png');
-        };
+    downloadBtn.href = blobUrl;
+    downloadBtn.download = fileName; // Applies the stego_image_XXXX.png name
+    downloadBtn.style.display = 'inline-block';
+
+    if (navigator.canShare && navigator.canShare({ files: [currentBlobFile] })) {
+        shareBtn.style.display = 'inline-block';
+    }
+}, 'image/png');
         img.src = e.target.result;
     };
     reader.readAsDataURL(fileInput.files[0]);
@@ -105,7 +108,7 @@ async function shareImage() {
     try {
         await navigator.share({
             files: [currentBlobFile],
-            title: 'Steganography Image',
+            title: currentBlobFile.name,
             text: 'Here is the encoded image payload.'
         });
     } catch (err) {
