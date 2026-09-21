@@ -57,7 +57,7 @@ function encodeMessage() {
 
             let msgIdx = 0;
             for (let i = 0; i < data.length && msgIdx < binaryMsg.length; i++) {
-                if ((i + 1) % 4 === 0) continue;
+                if ((i + 1) % 4 === 0) continue; // Skip Alpha channel
 
                 let currentBit = parseInt(binaryMsg[msgIdx]);
                 data[i] = (data[i] & 0xFE) | currentBit;
@@ -67,36 +67,38 @@ function encodeMessage() {
             ctx.putImageData(imgData, 0, 0);
 
             canvas.toBlob((blob) => {
-    if (!blob) {
-        alert("Error generating image file!");
-        return;
-    }
+                if (!blob) {
+                    alert("Error generating image file!");
+                    return;
+                }
 
-    // Generate a random 4-digit number (1000 - 9999)
-    const randomPin = Math.floor(1000 + Math.random() * 9000);
-    const fileName = `stego_image_${randomPin}.png`;
+                // Generate a random 4-digit PIN for the filename
+                const randomPin = Math.floor(1000 + Math.random() * 9000);
+                const fileName = `stego_image_${randomPin}.png`;
 
-    // Store file reference with the unique filename for Web Share API
-    currentBlobFile = new File([blob], fileName, { type: "image/png" });
+                // Store file reference for Web Share API
+                currentBlobFile = new File([blob], fileName, { type: "image/png" });
 
-    const blobUrl = URL.createObjectURL(blob);
-    const preview = document.getElementById('encode-preview');
-    const downloadBtn = document.getElementById('download-btn');
-    const shareBtn = document.getElementById('share-btn');
-    const saveInstructions = document.getElementById('save-instructions');
+                const blobUrl = URL.createObjectURL(blob);
+                const preview = document.getElementById('encode-preview');
+                const downloadBtn = document.getElementById('download-btn');
+                const shareBtn = document.getElementById('share-btn');
+                const saveInstructions = document.getElementById('save-instructions');
 
-    preview.src = blobUrl;
-    preview.style.display = 'inline-block';
-    saveInstructions.style.display = 'block';
+                preview.src = blobUrl;
+                preview.style.display = 'inline-block';
+                saveInstructions.style.display = 'block';
 
-    downloadBtn.href = blobUrl;
-    downloadBtn.download = fileName; // Applies the stego_image_XXXX.png name
-    downloadBtn.style.display = 'inline-block';
+                downloadBtn.href = blobUrl;
+                downloadBtn.download = fileName;
+                downloadBtn.style.display = 'inline-block';
 
-    if (navigator.canShare && navigator.canShare({ files: [currentBlobFile] })) {
-        shareBtn.style.display = 'inline-block';
-    }
-}, 'image/png');
+                // Enable Web Share button if supported
+                if (navigator.canShare && navigator.canShare({ files: [currentBlobFile] })) {
+                    shareBtn.style.display = 'inline-block';
+                }
+            }, 'image/png');
+        };
         img.src = e.target.result;
     };
     reader.readAsDataURL(fileInput.files[0]);
